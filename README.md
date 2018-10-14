@@ -1,2 +1,3 @@
 # GoodComputer
-## &amsp;&amsp;It's a python-web project that I'm going to use for graduation design.I programmed it with django.
+---
+## It's a python-web project that I'm going to use for graduation design.I programmed it with django.
