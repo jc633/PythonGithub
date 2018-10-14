@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #     'haystack',  # È«ÎÄ¼ìË÷ÒýÇæ
+    'Product',
+    'User',
 ]
 
 MIDDLEWARE = [
