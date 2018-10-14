@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>好电脑-用户注册</title>
+	<title>{%block title%}好电脑-用户注册{%endblock%}</title>
+	{%load static%}
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/animate.min.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/common.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/validform.css">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/animate.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/common.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/Validform_v5.3.2_min.css'%}">
 	<style type="text/css">
+	    #top_bar{
+	    	height: 100px;
+	    	font-family: 'STXingkai';
+	    	box-shadow: 0px 3px 6px #C2C1C1;
+	    }
+	    a:link{
+	    	color: #4074F7;
+	    }
+	    a:visited{
+	    	color: #3C2CF7;
+	    	text-decoration: none;
+	    }
+	    a:hover{
+	    	color: #EA2A2A;
+	    	text-decoration: none;
+	    }
+	    .first-tit{
+	    	position: absolute;
+            font-size: 70px;
+            bottom: -13px;
+	    }
+	    .second-tit{
+	    	position: absolute;
+	    	bottom: 8px;
+	    	color: #E44F4F;
+	    	transform: rotate(-3deg);
+	    	font-size: 25px;
+	    }
 		
-		#regist{
-			
+		#regist{	
             height: 550px;
             width: 930px;
             margin:0 auto;
@@ -23,6 +51,10 @@
 			width: 100%;
 			height: 70px;
 			border-bottom: 1px solid #C0BFBF;
+		}
+		.reg-area{
+		    margin-top: 70px;
+		    width: 100%;
 		}
 		#regist .reg-form{
 			font-size: 20px;
@@ -39,10 +71,16 @@
 			margin-left: -15px;
 			margin-top: 20px;
 		}
+		.vertify{
+			width: 120px;height:34px;
+			float: left;
+			border: 1px solid #D6D4D4;
+			border-radius: 5px;
+		}
 	   #regist .connect-img{
 	   	    height: 290px;
 	   	    width:290px;
-	   	    background: url(../static/img/二维码.jpg);
+	   	    background: url(../static/img/公众号.jpg);
 	   	    background-repeat: no-repeat;
 	   	    background-size: 100% 100%;
 	   }
@@ -59,9 +97,9 @@
  	<div id="regist">
  		<div class="reg-tit">
  			<span style="margin-left: 40px;font-size: 20px;color: #DE5151">快速注册 /领取新人大礼包</span>
-            <span style="float: right;" >已有账号?<a href="Login" style="font-size: 18px">点这里登录</a></span>
+            <span style="float: right;" >已有账号?<a href="{%url 'login'%}" style="font-size: 18px">点这里登录</a></span>
  		</div>
- 		<br><br>
+ 	  <div class="reg-area">
  		<div class="reg-form col-lg-6 col-md-6 col-sm-8">
              
  			<form role='form' method="post" id="regist-form" action="doRegist" style="margin-top: -50px;">
@@ -85,6 +123,11 @@
  					<div class="col-sm-8 col-sm-pull-1"><input class="form-control"  type="password" name="password2" placeholder="请再输入一次密码"  datatype="*" recheck="password" errormsg="两次密码不一致" nullmsg="请再输一次密码">
  					</div>
                       <span class="col-sm-4"></span>
+                    <div class="col-sm-9 col-sm-pull-1">
+                    	<input class="vertify" type="text"  datatype="*" nullmsg="请输入右侧的验证码">
+                    	<span style="margin-left:20px;"><img src="{%static 'img/space.png'%}" width="80px" height="34px"></span>
+ 					</div>
+                    <span class="col-sm-3 col-sm-pull-1"></span>
  					<div class="col-sm-9 col-sm-pull-1"><input type="checkbox"  name="agree" datatype="*" nullmsg="请接受我们的协议">
  						<span style="font-size: 12px;margin-left: 1px">&nbsp;我已阅读并同意<a href="#">《好电脑网站协议》</a></span><br>
  					</div>
@@ -97,10 +140,11 @@
  			<div class="connect-img"></div><br>
  			<p style="margin-left: 26px;font-size: 17px">关注公众号,实时获取优惠信息</p>
  		</div>
+ 	   </div>
  	</div>
  </div>
- <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
- <script type="text/javascript" src="../static/js/Validform_v5.3.2_min.js"></script>
+ <script type="text/javascript" src="{%static 'js/jquery-3.3.1.min.js'%}"></script>
+ <script type="text/javascript" src="{%static 'js/Validform_v5.3.2_min.js'%}"></script>
  <script type="text/javascript">
  
    $(function() {

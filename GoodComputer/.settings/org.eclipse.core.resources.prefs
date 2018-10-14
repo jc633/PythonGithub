@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//CommonUtils/imgUtils.py=utf-8
+encoding//CommonUtils/stringUtils.py=utf-8
 encoding//GoodComputer/settings.py=utf-8
 encoding//Product/urls.py=utf-8
 encoding//User/urls.py=utf-8
