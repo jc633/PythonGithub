@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'haystack',  # 全文检索引擎
+    #     'haystack',  # 全文检索引擎
 ]
 
 MIDDLEWARE = [
