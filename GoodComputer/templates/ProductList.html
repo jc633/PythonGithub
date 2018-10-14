@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+	<title>商品列表</title>   
+	<style type="text/css">
+		.show-area{
+			width: 1300px;
+			height: 600px;
+			margin:0 auto;
+			margin-top: 50px;
+		}
+		.list-area{
+			margin:20px;
+		}
+		.list-area .table-area{
+			width: 100%;
+			overflow:visible;
+		}
+		thead>tr>th{
+          text-align: center;
+          font-size: 14px
+		}
+    .length-limit{
+      word-break: break-all;
+      word-wrap:break-word;
+      max-width:170px;
+      height:20px;
+      overflow:hidden;
+    }
+    .pro-utils a{
+      margin-left: 7px;
+    }
+	</style>
+</head>
+<body>
+ {%include 'top_bar.html'%}
+ <div class="show-area">
+ 	<center><h2>库存列表</h2></center>
+ 	<div class="list-area">
+ 	  <div class="table-area">
+ 	  	<table class="table table-bordered table-hover" style="width: 100%">
+ 	  		<thead>
+ 	  			<tr style="background-color: #2987F4;color: white;height: 30px;">
+	 	  			<th>商品编号</th>
+	 	  			<th>商品名称</th>
+	 	  			<th>商品价格</th>
+	 	  			<th>库存量</th>
+	 	  			<th>是否上架</th>
+	 	  			<th>成交量</th>
+	 	  			<th>累计评价</th>
+	 	  			<th >商品简介</th>
+	 	  			<th>发布时间</th>
+	 	  			<th>操作</th>
+ 	  			</tr>
+ 	  		</thead>
+ 	  		<tbody>
+ 	  		  {%if data %}
+ 	  		    {% for obj in data.page.object_list%}
+ 	  			<tr>
+ 	  				<td><div>{{obj.proId}}</div></td>
+ 	  				<td>
+              <div class="length-limit" title="{{obj.proName}}">
+              {{obj.proName}}
+              </div>
+            </td>
+ 	  				<td><div>{{obj.proPrice}}</div></td>
+ 	  				<td><div>{{obj.proCounts}}</div></td>
+ 	  				<td>
+              <div>
+                {% if obj.proSale %}是
+                {%else%}否
+                {%endif%}
+              </div>
+            </td>
+ 	  				<td><div>{{obj.proMouthcount}}</div></td>
+ 	  				<td><div>{{obj.proRemarkcount}}</div></td>
+ 	  				<td>
+              <div class="length-limit" title="{{obj.proDesc}}">
+                {{obj.proDesc}}
+              </div> 
+            </td>
+ 	  				<td style="width: 140px">{{obj.proTime}}</td>
+ 	  				<td  style="width: 220px">
+              <div class="pro-utils">
+   	  				<a href="{%url 'actDeal' 'get-pro-detail' obj.proId%}">详情</a>
+   	  				<a href="{%url 'actDeal' 'editPro' obj.proId%}">修改</a>
+   	  				<a href="{%url 'actDeal' 'delPro' obj.proId %}">删除</a>
+              <a href="{%url 'actDeal' 'salePro' obj.proId%}">上架</a>
+   	  				<a href="{%url 'actDeal' 'noSalePro' obj.proId%}">下架</a>
+             </div>
+ 	  			   </td>
+ 	  			</tr>
+ 	  			{%empty%}
+ 	  			<tr>
+ 	  				<td colspan="10" style="text-align: center;font-size: 16px;">没有查到商品信息，先去发布商品吧</td>
+ 	  			</tr>
+ 	  			{%endfor%}	 
+ 	  		</tbody>
+ 	  	</table>
+ 	 {% if data.page.has_other_pages %}
+    <div class="devide-page" index="{{data.page.number}}">
+      <ul class="pager">
+      <li class="last-page">
+     {% if data.page.has_previous %}<a href="?page={{data.page.previous_page_number }}">{% endif %}上一页</a>
+     </li>
+     {% for index in data.paginator.page_range %}
+       <li><a class="pageIndex" href="?page={{index}}">{{index}}</a></li>
+      {% endfor %}
+      <li class="next-page">
+      {% if data.page.has_next %}<a href="?page={{ data.page.next_page_number }}">{% endif %}下一页</a>
+      </li>
+      &emsp;&emsp;<span>共有{{data.paginator.num_pages}}页</span>
+      </ul>   
+      </div>
+    {% endif %}
+  {%endif%}
+ 	  </div>
+ 	</div>
+ </div>
+ <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+ <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ <script>
+ 	  var index = $('.devide-page').attr('index');
+      $(".last-page").click(function() { 
+        $('.pageIndex').eq(index-1).addClass('active');
+      });
+      //点击下一页
+        $(".next-page").click(function() {
+        $('.active').removeClass('active');
+        $('.pageIndex').eq(index+1).addClass('active');
+
+      });
+     //点击数字下标切换
+       $(".pageIndex").click(function(event) {
+         var index = $(this).text();
+         $('.active').removeClass('active');
+         $(this).addClass('active');
+       });
+
+        $(document).ready(function() {
+          $('.pageIndex').eq(index-1).addClass('active');
+       });
+ </script>
+</body>
+</html>

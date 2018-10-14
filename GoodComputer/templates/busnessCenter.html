@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>卖家中心</title>
+	 {% load staticfiles %}
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/validform.css'%}"> 
+	<style type="text/css">
+		#h-bar{
+			margin: 0;
+			height: 40px;
+			width: 100%;
+			background-color: #C71B4C;
+		}
+		.h-bar{
+			width: 1200px;
+			margin:0 auto;
+		}
+		.h-bar .h-tit{
+			font-family: "STXingKai";
+			font-size: 35px;
+			color: #fff; 
+		}
+		.util-bar{
+			position: relative;
+			width: 1200px;
+			margin: 0 auto;
+			margin-top: 20px;
+		}
+		/*左侧菜单栏*/
+		#m-bar{
+          margin: 0;
+          width: 220px;
+          float: left;
+          height: 460px;
+          border: 1px solid #E4D2D2;
+          padding: 10px;
+		}
+		#m-bar .category{
+          position: relative;
+          margin-top: 20px;
+          width: 100%;
+          height: 80px;
+          padding: 15px;
+		}
+		.category i{
+			font-size: 20px;
+			color: #3A93E4;
+		}
+		.category span{
+			margin-left: 6px;
+			font-size: 20px;
+		}
+		.category ul li{
+			margin-left: -15px;
+		}
+		.category ul li a{
+			font-size: 14px;
+		}
+       
+       /*右侧操作区域*/
+        #u-bar{
+        	width: 900px;
+        	height: 700px;
+            border: 1px solid #E4D2D2;
+            float: right;
+        }
+        #u-bar .default-show{
+        	width: 100%;
+        	font-size: 20px;
+        	height:600px;
+        	margin-top:60px;
+        	line-height: 30px;
+        	text-align: center;
+        }
+        .default-show .show-img{
+        	width: 100%;
+        	height:300px;
+        }
+
+	</style>
+</head>
+<body>
+{% include 'top_bar.html'%}
+ <div id="h-bar">
+ 	<div class="h-bar">
+ 		<span class="h-tit">好电脑</span>
+  	 	<span style="font-size: 16px;color:white">卖家中心</span>
+ 	</div>
+ </div>
+<div class="util-bar">
+ <div id="m-bar">
+ 	<div class="category">
+ 		<div>
+ 			<i class="fa fa-minus-square"></i>
+ 			<span>店铺管理</span>
+ 			<ul>
+ 				<li><a href="/user/busnessCenter?util=freeOpenShop">免费开店</a></li>
+ 				<li><a href="">我的店铺</a></li>
+ 			</ul>
+ 		</div>
+ 	</div>
+ 	<div class="category">
+ 		<div>
+ 			<i class="fa fa-credit-card"></i>
+ 			<span>交易管理</span>
+ 			<ul>
+ 				<li><a href="">已卖出的宝贝</a></li>
+ 				<li><a href="">订单管理</a></li>
+ 				<li><a href="">评价管理</a></li>
+ 			</ul>
+ 		</div>
+ 	</div>
+ 	<div class="category">
+ 		<div>
+ 			<i class="fa fa-truck"></i>
+            <span>物流管理</span>
+            <ul>
+            	<li><a href="">发货</a></li>
+            	<li><a href="">已发货物的物流</a></li>
+            </ul>
+ 		</div>
+ 	</div>
+ 	<div class="category">
+ 		<div>
+ 			<i class="fa fa-gift"></i>
+ 			<span>商品管理</span>
+ 			<ul>
+ 				<li><a href="/user/busnessCenter?util=releaseProduct">发布商品</a></li>
+ 				<li><a href="/user/busnessCenter?util=findProduct">商品查找</a></li>
+ 				<li><a href="{%url 'listProduct'%}?page=1">库存查看</a></li>
+ 			</ul>
+ 		</div>
+ 	</div>
+ </div>
+
+
+  <div id="u-bar">
+  	{% if html_name %}
+  	 {% include html_name %}
+  	{% else %}
+  	<div  class="default-show">
+  	 <h2>还没开店？赶快免费开店赚钱!</h2><br><br>
+  	  <img src="{% static 'img/招商赚钱.jpg'%}" class="show-img">
+  	 </div>
+  	{% endif %}
+  	
+ </div>
+  <script type="text/javascript" src="{% static 'js/Validform_v5.3.2_min.js'%}"></script>
+  <script type="text/javascript">
+  	
+  </script>
+</body>
+</html>

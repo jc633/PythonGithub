@@ -1,0 +1,85 @@
+{% extends '../index.html' %}
+{% load staticfiles %}
+{% load highlight %}
+
+{%block title%}搜索结果{% endblock %}
+{%block home %}<i class="fa fa-home"></i><a href="{%url 'index'%}">首页</a>{% endblock %}
+{% block content %}
+{% if query %}
+ <div id="goods-bar">
+   <div class="goods-show">
+    {% for result in page.object_list %}
+    <div class="col-lg-2 col-md-3 col-sm-6 goods-area">
+     <div class="goods-item">
+        <div class="img-bar">
+          <a href="#"><img src="{%static 'img/onload.gif'%}"data-echo="{{MEDIA_URL}}{{result.object.proImg.0}}"
+           class="img-responsive loading animated fadeIn" alt="图片加载失败"></a>
+        </div>
+        <div class="describe-bar">
+            <div class="price"><b style="font-size: 16px">¥</b><span>{{result.object.proPrice}}.00</span></div>
+            <div class="name"><a href="#" title="{{result.object.proName}}">{% highlight result.object.proName with query %}</a></div>
+            <div class="desc" title="{{result.object.proDesc}}">{% highlight result.object.proDesc with query%}</div>
+            <div class="remark-count">
+              <i class="fa fa-comments-o" style="color: #ADACAD"></i>
+              已有<strong style="color: #1B27E9">{{result.object.proRemarkcount}}</strong>人评论
+            </div>
+            <a href="#" class="shop">
+              <img src="{%static 'img/shop.png'%}" width="16px" height="16px">&nbsp;{% highlight result.object.proShop with query%}
+            </a>
+       </div>
+         <div class="utils">
+           <span><i class="fa fa-heart-o"></i></span>
+           <span><i class="fa fa-shopping-cart"></i></span>
+         </div>
+    </div>
+   </div> 
+    {% empty %}
+        <center><div class="alert alert-info animated bounceInUp" style="font-size: 20px">抱歉,没有找到相关的内容,换个关键词试试吧</div></center>
+    {% endfor %}
+   </div>
+</div>
+    {% if page.has_other_pages %}
+    <div class="devide-page" index="{{page.number}}">
+      <ul class="pager">
+      <li class="last-page">
+     {% if page.has_previous %}<a href="?q={{query}}&amp;page={{ page.previous_page_number }}">{% endif %}上一页</a>
+     </li>
+     {% for index in paginator.page_range %}
+       <li><a class="pageIndex" href="?q={{ query }}&amp;page={{index}}">{{index}}</a></li>
+      {% endfor %}
+      <li class="next-page">
+      {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}下一页</a>
+      </li>
+      &emsp;&emsp;<span>共有{{paginator.num_pages}}页</span>
+      </ul>
+      
+      </div>
+
+    {% endif %}
+{% endif %}
+{% endblock %}
+
+{% block js%}
+ //点击上一页
+      var index = $('.devide-page').attr('index');
+      $(".last-page").click(function() { 
+        $('.pageIndex').eq(index-1).addClass('active');
+      });
+      //点击下一页
+        $(".next-page").click(function() {
+        $('.active').removeClass('active');
+        $('.pageIndex').eq(index+1).addClass('active');
+
+      });
+     //点击数字下标切换
+       $(".pageIndex").click(function(event) {
+         var index = $(this).text();
+         $('.active').removeClass('active');
+         $(this).addClass('active');
+       });
+
+        $(document).ready(function() {
+          $('.pageIndex').eq(index-1).addClass('active');
+       });
+{% endblock %}
+
