@@ -1,2 +1,2 @@
-# PythonGithub
-It's a place I put some python projects
+# GoodComputer
+It's a python-web project that I'm going to use for graduation design.I programmed it with django.
