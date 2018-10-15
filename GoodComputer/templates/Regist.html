@@ -71,7 +71,7 @@
 			margin-left: -15px;
 			margin-top: 20px;
 		}
-		.vertify{
+		.vertify-input{
 			width: 120px;height:34px;
 			float: left;
 			border: 1px solid #D6D4D4;
@@ -124,8 +124,10 @@
  					</div>
                       <span class="col-sm-4"></span>
                     <div class="col-sm-9 col-sm-pull-1">
-                    	<input class="vertify" type="text"  datatype="*" nullmsg="请输入右侧的验证码">
-                    	<span style="margin-left:20px;"><img src="{%static 'img/space.png'%}" width="80px" height="34px"></span>
+                    	<input class="vertify-input" type="text"  datatype="*" nullmsg="请输入右侧的验证码">
+                    	<span style="margin-left:20px;">
+                    			<img id="vertify" src="get-vertify" width="80px" height="34px" title="点击切换图片" style="cursor: pointer;">
+                    	</span>
  					</div>
                     <span class="col-sm-3 col-sm-pull-1"></span>
  					<div class="col-sm-9 col-sm-pull-1"><input type="checkbox"  name="agree" datatype="*" nullmsg="请接受我们的协议">
@@ -160,6 +162,10 @@
     $(".connect-img").mouseleave(function(event) {
    	  $(this).removeClass('animated tada');
    });
+    $('#vertify').on('click', function(event) {
+    	var timeStamp = new Date().getTime();
+    	$(this).attr('src', 'get-vertify?time='+timeStamp); 	
+    });
  </script>
 </body>
 </html>

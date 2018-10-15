@@ -5,7 +5,8 @@ from CommonUtils.imgUtils import imgUtil
 
 class TestUser(TestCase):
     def testVertify(self):
-        img = imgUtil(None, None).get_vertify_img()
+        code = imgUtil(None, None).get_vertify_img()
+        print(code)
 
 
 if __name__ == '__main__':
