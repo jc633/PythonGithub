@@ -15,6 +15,7 @@
 	    }
 	    a:link{
 	    	color: #4074F7;
+	    	text-decoration: none;
 	    }
 	    a:visited{
 	    	color: #3C2CF7;
@@ -26,6 +27,7 @@
 	    }
 	    .first-tit{
 	    	position: absolute;
+	    	left: 70px;
             font-size: 70px;
             bottom: -13px;
 	    }
@@ -35,7 +37,16 @@
 	    	color: #E44F4F;
 	    	transform: rotate(-3deg);
 	    	font-size: 25px;
+	    	left: 300px;
 	    }
+	     .regist-mention{
+		   	position: absolute;
+		   	bottom: 10px;
+		   	font-family: 'SimHei';
+		   	font-size: 18px;
+		   	right: 160px;
+		   	display: none;
+	   }
 	  {%block css%}
 		#regist{	
             height: 550px;
@@ -82,16 +93,18 @@
 	   	    background: url(../static/img/公众号.jpg);
 	   	    background-repeat: no-repeat;
 	   	    background-size: 100% 100%;
-	   }
+	   }  
 	   {%endblock%}
 	</style>
 </head>
 <body>
  <div id="top_bar" class="col-lg-12">
- 	<div class="col=lg-7"><span class="first-tit col-lg-offset-2"><a href="{% url 'index'%}" title="回到首页">好电脑</a></span>
- 		<span class="second-tit col-lg-offset-4">买电脑就上好电脑</span>
+ 	<div style="width: 1200px;margin:0 auto;height:100%;position: relative;">
+ 	<div class="col=lg-7"><span class="first-tit"><a href="{% url 'index'%}" title="回到首页">好电脑</a></span>
+ 		<span class="second-tit">买电脑就上好电脑</span>
  	</div>
- 	<div class="top_bar_img col-lg-offset-8"></div>
+ 	<div class="regist-mention  panel-warning">请注意,用户名一旦注册便不能更改!!!</div>
+ 	</div>
  </div>
  {%block content%}
  <div class="col-lg-12">
@@ -125,9 +138,9 @@
  					</div>
                       <span class="col-sm-4"></span>
                     <div class="col-sm-9 col-sm-pull-1">
-                    	<input class="vertify-input" type="text"  datatype="*" nullmsg="请输入右侧的验证码" name="code">
+                    	<input class="vertify-input" type="text"  datatype="*" nullmsg="请输入右侧的验证码" name="code" style="text-align: center;">
                     	<span style="margin-left:20px;">
-                    			<img id="vertify" src="get-vertify" width="80px" height="34px" title="点击切换图片" style="cursor: pointer;">
+                    	<img id="vertify" src="get-vertify" width="80px" height="34px" alt="验证码" title="点击切换图片" style="cursor: pointer;">
                     	</span>
  					</div>
                     <span class="col-sm-3 col-sm-pull-1"></span>
@@ -136,7 +149,7 @@
  					</div>
                       <span class="col-sm-3 col-sm-pull-1"></span>
  				<button type="submit" class="col-sm-6 btn btn-danger" style="height: 50px;font-size: 20px;margin-top:15px;">完成注册</button>
-                <span class=" col-sm-5 col-lg-push-2"style="color:#EC1616;font-size: 14px;">{{failMessage}}</span>
+                <span class=" col-sm-6 col-lg-push-2 text-danger"style="font-size: 14px;">{{failMessage}}</span>
  			</form>
  		</div>
  		<div class="col-sm-4  col-sm-offset-1">
@@ -151,7 +164,7 @@
  <script type="text/javascript" src="{%static 'js/bootstrap.min.js'%}"></script>
  <script type="text/javascript" src="{%static 'js/Validform_v5.3.2_min.js'%}"></script>
  <script type="text/javascript">
- 
+  {%block js%}
    $(function() {
    	 	var valid = $("#regist-form").Validform({
 		tiptype:2,
@@ -171,6 +184,17 @@
     	var timeStamp = new Date().getTime();
     	$(this).attr('src', 'get-vertify?time='+timeStamp); 	
     });
+    $('.regist-mention').css('display', 'block');
+   {%endblock%}
+
+    //清除错误提示信息
+     function clear_failmesg(){
+        val = $('.text-danger').text();
+        if(val!=''){
+          $('.text-danger').text('');
+        }
+      }
+      setInterval(clear_failmesg,4000);
  </script>
 </body>
 </html>

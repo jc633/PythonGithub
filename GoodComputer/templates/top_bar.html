@@ -24,7 +24,7 @@
       list-style: none;
     }
 
-       /*顶部区域 */ 
+       /*顶部区域*/ 
         #top-bar{
       position: relative;
       width: 100%;
@@ -53,7 +53,7 @@
       color: #F23434;
       margin-right: 5px;
     }
-        /*导航栏的下拉菜单 */
+        /*顶部下拉菜单*/
      .dropdown-items{
           position: absolute;
           background-color:#FFF;
@@ -76,6 +76,7 @@
           display: inline-block;
           white-space: nowrap;
           margin-top: 6px;
+
     }
         .dropdown-items a:hover{
           background-color:#E9E5E5;
@@ -84,10 +85,10 @@
  <div id="top-bar">
     <div class="top-left-bar col-sm-5 col-sm-offset-1">
       <i class="fa fa-home"></i><a href="{%url 'index'%}">首页</a>
-      <span>{% block home%}欢迎来到 “好电脑” 购物商场{% endblock %}</span>
+      <span>{% block home%}欢迎来到【好电脑】购物商城{% endblock %}</span>
       {% if request.session.uName%}
-      <span>你好&nbsp;{{request.session.uName}}</span>
-      <span><a href="{%url 'logout'%}">退出</a></span>
+      <span>你好,&nbsp;{{request.session.uName}}</span>
+      <span><a href="{%url 'logout'%}">注销</a></span>
       {%else%}
       <span><a href="{%url 'login'%}">登录</a></span>
       <span><a href="{%url 'regist'%}">免费注册</a></span>
@@ -99,34 +100,34 @@
           <a href="{%url 'shoppingCar'%}">
             <i class="fa fa-shopping-cart"></i>购物车</a>
             <div class="dropdown-items">
-              <a href="#">已买到的宝贝</a>
-              <a href="#">未支付的宝贝</a>
+              <a href="#">已买到的商品</a>
+              <a href="#">待付款的商品</a>
             </div>
           </li>
         <li class="dropdown-tit">
           <a href="{%url 'myCollect'%}">我的收藏&nbsp;<sapn class="badge">56</span></a>
             <div class="dropdown-items">
-              <a href="#">我收藏的宝贝</a>
-              <a href="#">我收藏的店铺</a>
+              <a href="#">收藏的商品</a>
+              <a href="#">收藏的店铺</a>
             </div>
          </li>
         <li class="dropdown-tit">
-          <a href="{%url 'userCenter'%}"><i class="fa fa-user"></i>个人中心</a>
+          <a href="{%url 'userCenter'%}"><i class="fa fa-user"></i>用户中心</a>
           <div class="dropdown-items">
-            <a href="#">编辑资料</a>
+            <a href="#">个人资料</a>
             <a href="#">收货地址</a>
             <a href="#">我的订单</a>
-            <a href="#">我的足迹</a>
+            <a href="#">更改密码</a>
           </div>
         </li>
         <li class="dropdown-tit">
           <a href="{%url 'shopCenter'%}"><i class="fa fa-group"></i>卖家中心</a>
           <div class="dropdown-items">
-            <a href="/user/busnessCenter?util=freeOpenShop">免费开店</a>
-            <a href="/user/busnessCenter?util=releaseProduct">发布商品</a>
+            <a href="/user/enter/busnessCenter?util=freeOpenShop">免费开店</a>
+            <a href="/user/enter/busnessCenter?util=releaseProduct">发布商品</a>
             <a href="{%url 'listProduct'%}?page=1">查看库存</a>
             <a href="#">订单管理</a>
-            <a href="#">评价管理</a>
+            <a href="#">交易管理</a>
           </div>
         </li>
         <li>|</li>
@@ -138,14 +139,14 @@
   <script type="text/javascript" src="{%static 'js/bootstrap.min.js'%}"></script>
   <script type="text/javascript" src="{% static 'js/echo.min.js'%}"></script>
   <script type="text/javascript">
-      //导航栏下拉菜单
+      //顶部导航栏下拉菜单
        $('.dropdown-tit').hover(function() {
          $(this).find('.dropdown-items').slideDown('fast');
        }, function() {
          $(this).find('.dropdown-items').slideUp('fast');
        });
 
-       //图片懒加载 offset:离可视区域的距离 throttle:延迟时间
+       //图片懒加载 offset:图片离可视区域的距离 throttle:图片显示的延迟时间
         $(function() {
           Echo.init({offset:0,throttle:0});
         });

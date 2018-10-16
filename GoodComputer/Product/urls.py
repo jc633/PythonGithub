@@ -9,5 +9,5 @@ from . import views
 
 
 urlpatterns = [
-
+    url(r'^util\/list-product', views.listProduct, name='listProduct'),
 ]

@@ -14,5 +14,10 @@ urlpatterns = [
     url(r'^doRegist', views.doRegist, name='doRegist'),
     url(r'^login', views.login, name='login'),
     url(r'^doLogin', views.doLogin, name='doLogin'),
+    url(r'logout', views.logout, name='logout'),
     url(r'^get-vertify', views.vertifyImg),
+    url(r'^look/shoppingCar', views.shoppingCar, name='shoppingCar'),
+    url(r'^look/myCollect', views.myCollect, name='myCollect'),
+    url(r'^enter/userCenter', views.userCenter, name='userCenter'),
+    url(r'^enter/shopCenter', views.shopCenter, name='shopCenter'),
 ]
