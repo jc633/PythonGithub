@@ -11,6 +11,7 @@ from User import views
 urlpatterns = [
     url(r'^index', views.index, name='index'),
     url(r'^regist', views.regist, name='regist'),
-    url(r'^login', views.regist, name='login'),
+    url(r'^doRegist', views.doRegist, name='doRegist'),
+    url(r'^login', views.login, name='login'),
     url(r'^get-vertify', views.vertifyImg),
 ]

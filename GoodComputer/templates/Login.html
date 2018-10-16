@@ -1,65 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>好电脑-用户登录</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/animate.min.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/common.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/Validform_v5.3.2_min.css">
-	<link rel="stylesheet" type="text/css" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/login.min.css">  
-</head>
-<body>
-  <div id="top_bar" class="col-lg-12">
- 	<div class="col=lg-7"><span class="first-tit col-lg-offset-2"><a href="{% url 'index'%}" title="回到首页">好电脑</a></span>
- 		<span class="second-tit col-lg-offset-4">买电脑就上好电脑</span>
- 	</div>
- 	<div class="top_bar_img col-lg-offset-8"></div>
- </div>
-  <div id="login" class="col-sm-8 col-sm-offset-2">
-  	<div class="login-area">
-  	   <div>
-  		<div class="tit" style="color: #932816;font-size: 30px">账号登录</div>
-  		<div class="login-mention">扫码登录</div>
-       </div>
-  		<div>
-        <span class="text-danger">{{failMessage}}</span>
-  			<form role='form' id="login-form" method="post" action="doLogin">
-          {% csrf_token %}
-  			<div class="input-group col-sm-8 col-sm-offset-2">
-  				<span class="input-group-addon"><i class="fa fa-user"></i></span>
-  				<input type="text" name="usercount" class="form-control" id="usercount" placeholder="输入手机号">
-  				
-  			</div>
-  			<span class="Validform_checktip"></span>
-  			<div class="input-group col-sm-8 col-sm-offset-2">
-  				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-  				<input type="password" name="password" class="form-control" id="password" placeholder="输入密码">
-  			</div>
-  			<span class="Validform_checktip"></span>
-  			<div class="form-group  col-sm-offset-2">
-  				<button type="submit" class="btn btn-success  login-btn ">点击登录</button>
-  			</div>
-  		   </form>	
-         <div class="saoma-img"></div>
-     	</div>
+{%extends 'Regist.html'%}
+{%load static%}
+{%block title%}用户登录-好电脑{%endblock%}
 
-  		<div class="col-sm-12 thiird-login">
-  			<span style="top: -30px;font-size:14px">第三方账号登录<span style="position:absolute;top:-30px;right:4px">没账号?<a href="Regist">赶紧注册</a></span></span>
-  			<ul style="margin-top: 10px">
-  				<li><a href="#" title="QQ"><i style="color: #15909F" class="fa fa-qq"></i></a></li>
-  				<li ><a href="#" title="GitHub"><i style="color: #011214"  class="fa fa-github"></i></a></li>
-  				<li ><a href="#" title="微信"><i style="color: #1FBC4F" class="fa fa-weixin"></i></a></li>
-  				<li ><a href="#" title="微博"><i style="color: #F32C40" class="fa fa-weibo"></i></a></li>
-  			</ul>
-  		</div>
+{%block content%}
+<style type="text/css">
+    .login-area{
+      width:1100px;
+      height:600px;
+      margin:0 auto;
+      margin-top:50px;
+      border: 1px solid gray;
+    }
+    .ad-image{
+      height:450px;
+      margin:10px;
+      float:left;
+      border:1px solid gray;
+    }
+    .ad-image img{
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .login-form{
+      height:450px;
+      margin:10px;
+      margin-left: 30px;
+      border:1px solid blue;
+    }
+</style>
+  <div id="login" class="col-sm-12">
+  	<div class="login-area">
+      <div class="ad-image col-lg-7 hidden-sm">   
+        <img src="localhost:8000/get-image?name=7.jpg">
+      </div>
+  	  <div class="login-form col-lg-4 col-sm-12">
+          
+  	  </div>
   	</div>
-  	
   </div>
-  <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../static/js/Validform_v5.3.2_min.js"></script>
+  {%endblock%}
   <script type="text/javascript">
   	var i = 1;
   	$(function() {
@@ -99,5 +78,3 @@
   		});
   	});
   </script>
-</body>
-</html>

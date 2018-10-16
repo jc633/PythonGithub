@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'GoodComputer.MyMiddleware.LoginRequiredMiddleware.LoginRequiredMiddleware',
+    'GoodComputer.MyMiddleware.GetImageMiddleware.GetImageMiddleware',
 ]
 
 ROOT_URLCONF = 'GoodComputer.urls'

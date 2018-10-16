@@ -97,4 +97,5 @@ class vertifyCode():
                           self.get_random_Color())
         self.drawLine(3)
         self.drawPoint(60)
+        request.session['code'] = self.code.lower()
         return self.img

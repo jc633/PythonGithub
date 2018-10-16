@@ -4,17 +4,30 @@ from django.template.context_processors import request
 from django.http import HttpResponse
 from CommonUtils.vertifyUtils import vertifyCode
 from io import BytesIO
+from User.userUtils import Admin
 
+# 实例化操作类
+admin = Admin()
 
-# Create your views here.
 # 系统首页
-
 def index(request):
     return HttpResponse('我是一个人')
+
+# 登录页面
+def login(request):
+    return render(request, 'Login.html')
 
 # 注册页面
 def regist(request):
     return render(request, 'Regist.html')
+
+# 处理注册信息
+def doRegist(request):
+    mes = admin.addUser(request)
+    if mes == True:
+        return render(request, 'Login.html')
+    return render(request, 'Regist.html', {'failMessage': mes})
+
 
 # 生成验证码图片
 def vertifyImg(request):
@@ -25,7 +38,3 @@ def vertifyImg(request):
     f = BytesIO()
     img.save(f, 'png')
     return HttpResponse(f.getvalue())
-
-# 登录页面
-def login(request):
-    return render(request, 'Login.html')
