@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^regist', views.regist, name='regist'),
     url(r'^doRegist', views.doRegist, name='doRegist'),
     url(r'^login', views.login, name='login'),
+    url(r'^doLogin', views.doLogin, name='doLogin'),
     url(r'^get-vertify', views.vertifyImg),
 ]

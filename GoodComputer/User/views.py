@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from CommonUtils.vertifyUtils import vertifyCode
 from io import BytesIO
 from User.userUtils import Admin
+from django.http.response import HttpResponseRedirect
 
 # 实例化操作类
 admin = Admin()
@@ -16,6 +17,10 @@ def index(request):
 # 登录页面
 def login(request):
     return render(request, 'Login.html')
+
+# 处理登录信息
+def doLogin(request):
+    return HttpResponseRedirect('/user/index')
 
 # 注册页面
 def regist(request):
