@@ -1,5 +1,5 @@
 .login-bar{
-      width:1100px;
+      width:1200px;
       height:600px;
       margin:0 auto;
       margin-top:50px;
@@ -22,7 +22,7 @@
       margin-left: 30px;
       padding: 0;
       border:1px solid #CDCDCE;
-      box-shadow: 0 0 10px #C1BDBD;
+      box-shadow: 0 0 10px #8D8C8C;
     }
     .login-form .tit-bar{
       position: relative;

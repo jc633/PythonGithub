@@ -6,13 +6,15 @@
 '''
 from User.models import user
 from CommonUtils.stringUtils import stringUtil
+from CommonUtils.sqlUtils import sqlUtil
 from django.db.models import Q
 # 实例化操作类
 stringutil = stringUtil()
+sqlutil = sqlUtil(user)
 
-class Admin():
+class userUtil():
 
-    # 添加用户
+    # 注册
     def addUser(self, request):
         code = request.POST.get('code').lower()
         if code == request.session['code']:
@@ -26,24 +28,12 @@ class Admin():
             uTime = stringutil.getDate()
             u = user(uName, stringutil.jiamiString(uPwd),
                      None, None, uPhone, None, None, uTime)
-            try:
-                u.save()
+            u.save()
+            if sqlutil.add(u):
                 return True
-            except Exception as e:
-                print(e)
-                return '*注册失败'
+            return '*注册失败'
         return '*验证码错误'
 
-    # 查询用户,无参时返回所有对象
+    # 查询用户,无参时返回None
     def selectUser(self, args):
-        if args:
-            if isinstance(args, dict):
-                for k, v in args.items():
-                    q = Q((k, v))
-                try:
-                    u = user.objects.get(q)
-                    return u
-                except:
-                    return None
-            raise TypeError('请传一个字典参数,如{"id":id}')
-        return user.objects.all()
+        return sqlutil.select(args, 'OR', 'uName')

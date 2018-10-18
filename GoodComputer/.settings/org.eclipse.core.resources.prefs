@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//CommonUtils/imgUtils.py=utf-8
+encoding//CommonUtils/sqlUtils.py=utf-8
 encoding//CommonUtils/stringUtils.py=utf-8
 encoding//CommonUtils/vertifyUtils.py=utf-8
 encoding//GoodComputer/settings.py=utf-8
@@ -7,6 +8,7 @@ encoding//MyMiddleware/GetImageMiddleware.py=utf-8
 encoding//MyMiddleware/LoginRequiredMiddleware.py=utf-8
 encoding//Product/listfield.py=utf-8
 encoding//Product/models.py=utf-8
+encoding//Product/shopUtils.py=utf-8
 encoding//Product/urls.py=utf-8
 encoding//Product/views.py=utf-8
 encoding//User/models.py=utf-8

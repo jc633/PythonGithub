@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^look/shoppingCar', views.shoppingCar, name='shoppingCar'),
     url(r'^look/myCollect', views.myCollect, name='myCollect'),
     url(r'^enter/userCenter', views.userCenter, name='userCenter'),
-    url(r'^enter/shopCenter', views.shopCenter, name='shopCenter'),
+    url(r'^enter/businessCenter', views.shopCenter, name='shopCenter'),
+    url(r'^addShop', views.addShop, name='addShop'),
 ]

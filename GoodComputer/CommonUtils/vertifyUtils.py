@@ -10,7 +10,7 @@ import string
 import json
 import base64
 from PIL import Image, ImageDraw, ImageFont
-
+from io import BytesIO
 
 # 将随机函数赋给变量 rdint
 rdint = random.randint
@@ -26,7 +26,7 @@ class vertifyCode():
         self.code = ''  # 验证内容
         self.img = Image.new(
             'RGB', (self.width, self.height), self.bgColor)  # 画布对象
-        self.savePath = savePath
+        self.savePath = savePath  # 图片保存路径
 
     # 获取随机颜色，RGB格式
     def get_random_Color(self):
@@ -87,7 +87,7 @@ class vertifyCode():
         del draw
 
     # 生成验证码图片，并返回图片对象
-    def getVertifyImg(self, request):
+    def getVertifyImg(self):
         x_start = 2
         y_start = 0
         for i in range(self.num):
@@ -97,5 +97,22 @@ class vertifyCode():
                           self.get_random_Color())
         self.drawLine(3)
         self.drawPoint(60)
-        request.session['code'] = self.code.lower()
         return self.img
+
+    # 将图片保存到内存,便于前台点击刷新
+    # 将验证码保存到session中，返回内存中的图片数据
+    def saveInMemory(self, request):
+        img = self.getVertifyImg()
+        request.session['code'] = self.code.lower()
+        f = BytesIO()  # 开辟内存空间
+        img.save(f, 'png')
+        return f.getvalue()
+
+    # 将图片保存在本地，并以json格式返回验证码内容
+    def saveInLocal(self):
+        img = self.getVertifyImg()
+        try:
+            img.save(self.savePath)
+        except:
+            raise NotADirectoryError('保存路径错误或不存在:' + self.savePath)
+        return json.dumps({'code': self.code})

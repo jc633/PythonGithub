@@ -79,7 +79,7 @@
   	<div class="shopForm-area openShop">
   		<h2>商店注册</h2>
   		<div class="shopForm">
-  		<form  action="/user/addShop" method="post" id="shop-form" enctype="multipart/form-data">
+  		<form  action="{%url 'addShop'%}" method="post" id="shop-form" enctype="multipart/form-data">
   			 {% csrf_token %}
              <div class="shopTable">
              	<div>

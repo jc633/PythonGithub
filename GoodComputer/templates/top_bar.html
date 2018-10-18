@@ -123,8 +123,8 @@
         <li class="dropdown-tit">
           <a href="{%url 'shopCenter'%}"><i class="fa fa-group"></i>卖家中心</a>
           <div class="dropdown-items">
-            <a href="/user/enter/busnessCenter?util=freeOpenShop">免费开店</a>
-            <a href="/user/enter/busnessCenter?util=releaseProduct">发布商品</a>
+            <a href="/user/enter/businessCenter?util=freeOpenShop">免费开店</a>
+            <a href="/user/enter/businessCenter?util=releaseProduct">发布商品</a>
             <a href="{%url 'listProduct'%}?page=1">查看库存</a>
             <a href="#">订单管理</a>
             <a href="#">交易管理</a>
@@ -150,5 +150,15 @@
         $(function() {
           Echo.init({offset:0,throttle:0});
         });
+
+       //顶部区域监听,往下滚动150px后,顶部区域固定
+       // $(window).scroll(function(event) {
+       //    if($(window).scrollTop()>=150){
+       //    $('#top_bar').css('position', 'fixed').css('z-index', '100');;
+       //   }
+       //   else{
+       //    $('#top_bar').css('position', 'relative');
+       //   }
+       // });
   </script>
 
