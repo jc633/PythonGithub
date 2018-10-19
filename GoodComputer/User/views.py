@@ -6,13 +6,13 @@ from CommonUtils.vertifyUtils import vertifyCode
 from CommonUtils.stringUtils import stringUtil
 from io import BytesIO
 from User.userUtils import userUtil
-from Product.shopUtils import shopUtil
+from Product.shopUtils import shopManage
 from django.http.response import HttpResponseRedirect
 
 # 实例化操作类
 userutil = userUtil()
 stringutil = stringUtil()
-shoputil = shopUtil()
+shopmanage = shopManage()
 
 # 系统首页
 def index(request):
@@ -41,7 +41,7 @@ def doLogin(request):
         return login(request, '*账号错误或不存在')
     if stringutil.jiemiString(u.uPwd) == request.POST.get('password'):
         request.session['uName'] = u.uName
-        request.session.set_expiry(60 * 10)  # 设置失效时间为10分钟
+#         request.session.set_expiry(60 * 10)  # 设置失效时间为10分钟
         return HttpResponseRedirect('/user/index')
     return login(request, '*密码错误')
 
@@ -54,10 +54,11 @@ def logout(request):
     except Exception as e:
         print(e)
 
-# 商店注册
-def addShop(request):
-    msg = shoputil.addShop(request)
+# 免费开店
+def openShop(request):
+    msg = shopmanage.addShop(request)
     return render(request, 'Message.html', {'msg': msg})
+
 
 # 查看购物车
 def shoppingCar(request):
@@ -76,9 +77,11 @@ def shopCenter(request):
     util = request.GET.get('util')
     if util:
         if util == 'freeOpenShop':
-            html = 'freeOpenShop.html'
-        return render(request, 'businessCenter.html', {'html_name': html})
-    return render(request, 'businessCenter.html')
+            html = 'business/freeOpenShop.html'
+        if util == 'releaseProduct':
+            html = 'business/releaseProduct.html'
+        return render(request, 'business/businessCenter.html', {'html_name': html})
+    return render(request, 'business/businessCenter.html')
 
 
 # 生成验证码图片

@@ -15,6 +15,11 @@ class stringUtil():
         s = ''.join(random.sample(string.ascii_letters + string.digits, n))
         return s
 
+    # 获取n位随机数字
+    def getRnDigit(self, n):
+        s = ''.join(random.sample(string.digits, n))
+        return s
+
     # 获取当前时间并格式化 eg:2018-10-14 18:20
     def getDate(self):
         t = time.strftime('%Y-%m-%d   %H:%M', time.localtime())

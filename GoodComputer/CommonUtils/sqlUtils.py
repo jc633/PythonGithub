@@ -14,7 +14,6 @@ class sqlUtil():
     def add(self, obj):
         try:
             obj.save()
-            print('sfsdfsd')
             return True
         except Exception as e:
             print(e)
@@ -30,7 +29,7 @@ class sqlUtil():
                 for k, v in args.items():
                     q.children.append((k, v))  # 组合查询条件
                 try:
-                    data = self.model.objects.filter().order_by(order_by)
+                    data = self.model.objects.filter(q).order_by(order_by)
                     if len(data) == 1:  # 只有一条数据时
                         return data[0]
                     return data

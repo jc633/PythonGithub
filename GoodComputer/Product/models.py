@@ -16,7 +16,7 @@ class shop(models.Model):
     shopHoner = models.IntegerField(null=False)  # 店铺荣誉
     shopNotice = models.IntegerField(null=False)  # 店铺人气
     shopDesc = models.CharField(max_length=30, null=True)  # 店铺描述
-    shopImg = models.ImageField(upload_to='img/shop/', null=False)  # 店铺图片
+    shopImg = models.ImageField(upload_to='img/shop/')  # 店铺图片
     shopTime = models.CharField(max_length=20, null=True)  # 开店时间
 
     class Meta:
@@ -47,6 +47,19 @@ class product(models.Model):
 
     class Meta:
         db_table = 'product'
+
+    def __str__(self):
+        return models.Model.__str__(self)
+
+# 商品分类表
+class category(models.Model):
+    catId = models.CharField(
+        primary_key=True, max_length=10, null=False)  # 品牌id
+    catName = models.CharField(max_length=20, null=False)  # 品牌名
+    catImg = models.ImageField(upload_to='img/category')  # 品牌图片
+
+    class Meta:
+        db_table = 'category'
 
     def __str__(self):
         return models.Model.__str__(self)

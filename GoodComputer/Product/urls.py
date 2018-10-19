@@ -9,5 +9,7 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^util\/list-product', views.listProduct, name='listProduct'),
+    url(r'^list-product', views.listProduct, name='listProduct'),
+    url(r'^releaseProduct', views.releaseProduct, name='releaseProduct'),
+
 ]

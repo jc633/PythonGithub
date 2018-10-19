@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
-from django.contrib.staticfiles.views import serve
+from django.contrib.staticfiles.views import serve  # 转发图标请求路径
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('favicon.ico', serve, {'path': 'img/favicon.ico'}),
     path('admin/', admin.site.urls),
     path('user/', include('User.urls')),
     path('product/', include('Product.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # +后面为配置media路径
