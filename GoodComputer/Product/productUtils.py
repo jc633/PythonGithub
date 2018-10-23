@@ -55,12 +55,9 @@ class productManage():
         num = request.GET.get('page')  # 获取页数参数
         try:
             data = self.selectProduct(args, connect_type, order_by)
-            if data:
-                # 将结果按每页15条数据进行分页，当后一页记录低于2条时归于上一页
-                paginator = Paginator(data, 15, 2)
-                page = paginator.page(num)
-            else:
-                return None
+            # 将结果按每页15条数据进行分页，当后一页记录低于2条时归于上一页
+            paginator = Paginator(data, 15, 2)
+            page = paginator.page(num)
         except PageNotAnInteger:  # 当页数不为整数
             page = paginator.page(1)
         except EmptyPage:  # 当页数为空

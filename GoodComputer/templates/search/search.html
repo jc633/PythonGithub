@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load myhighlight %}
 
-{%block title%}-搜索结果{%endblock%}
+{%block title%}{{query}}-搜索结果{%endblock%}
 {%block home %}<i class="fa fa-home"></i><a href="{%url 'index'%}">首页</a>{% endblock %}
 {% block content %}
 {% if query %}
@@ -82,9 +82,9 @@
           //更改选中下标的状态
           $('.pageIndex').eq(index-1).addClass('active');
           //动态更改网页标题
-          var s = window.location.search;
-          if(s.indexOf('&')!=-1){document.title = decodeURIComponent(window.location.search.split('&')[0].split('=')[1])+'-搜索结果';}
-          else{document.title = decodeURIComponent(window.location.search.split('=')[1])+'-搜索结果'}
+          //var s = window.location.search;
+          //if(s.indexOf('&')!=-1){document.title = decodeURIComponent(window.location.search.split('&')[0].split('=')[1])+'-搜索结果';}
+          //else{document.title = decodeURIComponent(window.location.search.split('=')[1])+'-搜索结果'}
        });
 {% endblock %}
 
