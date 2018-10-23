@@ -1,10 +1,8 @@
 # coding:utf-8
-from django.shortcuts import render, render_to_response
-from django.template.context_processors import request
+from django.shortcuts import render
 from django.http import HttpResponse
 from CommonUtils.vertifyUtils import vertifyCode
 from CommonUtils.stringUtils import stringUtil
-from io import BytesIO
 from User.userUtils import userUtil
 from Product.shopUtils import shopManage
 from django.http.response import HttpResponseRedirect
