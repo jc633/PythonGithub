@@ -22,13 +22,8 @@ class ListField(models.TextField):
             return value
         return ast.literal_eval(value)
 
-    def from_db_value(self, value):
-        if not value:
-            value = []
-            return value
-        if isinstance(value, list):
-            return value
-        return ast.literal_eval(value)
+    def from_db_value(self, value, expression, connection, context):
+        return self.to_python(value)
 
     # 将list数据转为str类型
     def get_db_prep_value(self, value, connection, prepared=False):

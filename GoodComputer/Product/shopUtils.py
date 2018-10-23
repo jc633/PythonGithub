@@ -8,7 +8,8 @@ from Product.models import shop
 from CommonUtils.stringUtils import stringUtil
 from CommonUtils.imgUtils import imgUtil
 from CommonUtils.sqlUtils import sqlUtil
-
+import os
+from haystack.urls import url
 # 操作类实例化
 stringutil = stringUtil()
 sqlutil = sqlUtil(shop)
@@ -16,25 +17,33 @@ sqlutil = sqlUtil(shop)
 class shopManage():
     # 商店注册
     def addShop(self, request):
-        shopOwner = request.session['uName']
-        if self.selectShop({'shopOwner': shopOwner}):
+        if self.isOpenShop(request):
             return '抱歉，你已经开过店了，一个人只能开一个店！'
         shopId = stringutil.getRnStr(10)
         shopName = request.POST.get('shopName')
+        shopOwner = request.session.get('uName')
         shopDesc = request.POST.get('shopDesc')
         shopImg = request.FILES.get('shopImg')
         shopTime = stringutil.getDate()
-        # 更改图片名并保存图片
+        # 更改图片名
         filename = 'shop_' + shopId
-        imgutil = imgUtil('img/shop/' + shopId, str(shopImg.name))
+        Dir = os.path.join('img/shop/', shopId + '/')  # 相对路径
+        imgutil = imgUtil(Dir, str(shopImg.name))
         imgutil.imgName = imgutil.change_upImg_name(filename)
-        imgutil.saveImg(shopImg)
         s = shop(shopId, shopName, shopOwner, 0,
                  0, shopDesc, imgutil.imgDir + imgutil.imgName, shopTime)
         if sqlutil.add(s):
-            return '开店成功,可以发布商品了！'
-        return '开店失败,重新添加'
+            imgutil.saveImg(shopImg)  # 保存图片
+            return '开店成功,可以<a href="/user/enter/businessCenter?util=releaseProduct">发布商品</a>了！'
+        return '开店失败'
 
     # 查询商店信息
     def selectShop(self, args):
         return sqlutil.select(args, 'OR', 'shopId')
+
+    # 判断是否开过店
+    def isOpenShop(self, request):
+        uName = request.session['uName']
+        if self.selectShop({'shopOwner': uName}):
+            return True
+        return False

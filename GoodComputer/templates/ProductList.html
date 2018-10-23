@@ -45,7 +45,7 @@
 	 	  			<th>商品编号</th>
 	 	  			<th>商品名称</th>
 	 	  			<th>商品价格</th>
-	 	  			<th>库存量</th>
+	 	  			<th>商品库存</th>
 	 	  			<th>是否上架</th>
 	 	  			<th>成交量</th>
 	 	  			<th>累计评价</th>
@@ -65,7 +65,7 @@
               </div>
             </td>
  	  				<td><div>{{obj.proPrice}}</div></td>
- 	  				<td><div>{{obj.proCounts}}</div></td>
+ 	  				<td><div>{{obj.proStock}}</div></td>
  	  				<td>
               <div>
                 {% if obj.proSale %}是
@@ -73,8 +73,8 @@
                 {%endif%}
               </div>
             </td>
- 	  				<td><div>{{obj.proMouthcount}}</div></td>
- 	  				<td><div>{{obj.proRemarkcount}}</div></td>
+ 	  				<td><div>{{obj.proTrade}}</div></td>
+ 	  				<td><div>{{obj.proRmark}}</div></td>
  	  				<td>
               <div class="length-limit" title="{{obj.proDesc}}">
                 {{obj.proDesc}}

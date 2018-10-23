@@ -10,7 +10,7 @@
 	<style type="text/css">
 	    #top_bar{
 	    	height: 100px;
-	    	font-family: 'STXingkai';
+	    	font-family: 'STXingkai','YouYuan','SimHei','Microsoft YaHei';
 	    	box-shadow: 0px 3px 6px #969696;
 	    }
 	    a:link{
@@ -28,16 +28,8 @@
 	    .first-tit{
 	    	position: absolute;
 	    	left: 70px;
-            font-size: 70px;
-            bottom: -13px;
-	    }
-	    .second-tit{
-	    	position: absolute;
-	    	bottom: 8px;
-	    	color: #E44F4F;
-	    	transform: rotate(-3deg);
-	    	font-size: 25px;
-	    	left: 300px;
+            height:90px;
+            bottom: 5px;
 	    }
 	     .regist-mention{
 		   	position: absolute;
@@ -100,8 +92,10 @@
 <body>
  <div id="top_bar" class="col-lg-12">
  	<div style="width: 1200px;margin:0 auto;height:100%;position: relative;">
- 	<div class="col=lg-7"><span class="first-tit"><a href="{% url 'index'%}" title="回到首页">好电脑</a></span>
- 		<span class="second-tit">买电脑就上好电脑</span>
+ 	<div class="col=lg-7"><span class="first-tit">
+ 		<a href="{% url 'index'%}" title="回到首页">
+ 		<img src="{%static 'img/好电脑登录标语.png'%}">
+ 	    </a>
  	</div>
  	<div class="regist-mention  panel-warning">请注意,用户名一旦注册便不能更改!!!</div>
  	</div>

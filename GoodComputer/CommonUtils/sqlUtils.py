@@ -30,11 +30,9 @@ class sqlUtil():
                     q.children.append((k, v))  # 组合查询条件
                 try:
                     data = self.model.objects.filter(q).order_by(order_by)
-                    if len(data) == 1:  # 只有一条数据时
-                        return data[0]
                     return data
                 except Exception as e:
                     print(e)
                     return None
             raise TypeError('请输入一个字典参数,如{"id":id}')
-        raise TypeError('Invild argument:', args)
+        return self.model.objects.all()

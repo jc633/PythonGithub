@@ -3,7 +3,7 @@
 <head>
 	<title>{%block title%}好电脑购物商场{%endblock%}</title>
 	<meta charset="utf-8">
-    {% load staticfiles %}
+    {% load static%}
 </head>
 <body>
 
@@ -11,8 +11,7 @@
  <div id="head-bar">
   <div class="head-bar">
   	 <div class="head-tit col-sm-4 col-sm-offset-1">
-  	 	<div class="big-tit">好电脑</div>
-  	 	<span>买电脑就上好电脑</span>
+  	 	<img src="{%static 'img/好电脑首页标语.png'%}">
   	 </div>
   	 <div class="search-bar col-sm-5">
   	 <form role='form' method="get" action="//10.6.31.21:8000/search" id="search-form" target="_self">	
@@ -81,10 +80,10 @@
             <div class="desc">{{obj.proDesc}}</div>
             <div class="remark-count">
               <i class="fa fa-comments-o" style="color: #ADACAD"></i>
-              已有<strong style="color: #1B27E9">{{obj.proRemarkcount}}</strong>人评论
+              已有<strong style="color: #1B27E9">{{obj.proRmark}}</strong>人评论
             </div>
             <a href="#" class="shop">
-              <img src="{%static 'img/shop.png'%}" width="16px" height="16px">&nbsp;{{obj.proShop }}
+              <img src="{%static 'img/shop.png'%}" width="16px" height="16px">&nbsp;{{obj.proShopName }}
             </a>
        </div>
          <div class="utils">

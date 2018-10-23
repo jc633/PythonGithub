@@ -39,8 +39,8 @@ def doLogin(request):
     u = userutil.selectUser({'uPhone': uPhone})
     if not u:
         return login(request, '*账号错误或不存在')
-    if stringutil.jiemiString(u.uPwd) == request.POST.get('password'):
-        request.session['uName'] = u.uName
+    if stringutil.jiemiString(u[0].uPwd) == request.POST.get('password'):
+        request.session['uName'] = u[0].uName
 #         request.session.set_expiry(60 * 10)  # 设置失效时间为10分钟
         return HttpResponseRedirect('/user/index')
     return login(request, '*密码错误')
@@ -79,10 +79,16 @@ def shopCenter(request):
         if util == 'freeOpenShop':
             html = 'business/freeOpenShop.html'
         if util == 'releaseProduct':
-            html = 'business/releaseProduct.html'
+            if shopmanage.isOpenShop(request):
+                html = 'business/releaseProduct.html'
+            else:
+                return Message(request, '你还没有开店,无法发布商品!')
         return render(request, 'business/businessCenter.html', {'html_name': html})
     return render(request, 'business/businessCenter.html')
 
+# 信息提示页面
+def Message(request, msg):
+    return render(request, 'Message.html', {'msg': msg})
 
 # 生成验证码图片
 def vertifyImg(request):

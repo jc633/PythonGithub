@@ -11,5 +11,7 @@ from . import views
 urlpatterns = [
     url(r'^list-product', views.listProduct, name='listProduct'),
     url(r'^releaseProduct', views.releaseProduct, name='releaseProduct'),
+    url(r'action\/act=(?P<act>\S+)\&id=(?P<proId>\S+)',
+        views.productAct, name='actDeal'),
 
 ]

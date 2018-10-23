@@ -1,0 +1,3 @@
+{{object.proName}}
+{{object.proDesc}}
+{{object.proShopName}}

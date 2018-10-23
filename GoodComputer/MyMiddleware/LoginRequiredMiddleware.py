@@ -5,14 +5,16 @@
 @author: jxc
 '''
 from django.utils.deprecation import MiddlewareMixin
-from GoodComputer import settings
+from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 class LoginRequiredMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        exclude = ['login', 'regist', 'index', 'search', 'logout']
+        exclude = ['login', 'regist', 'index',
+                   'search', 'logout', 'doLogin', 'doRegist', 'get-vertify']
         for ex in exclude:
             if ex in request.path:
                 return
-        if not request.has_key('uName'):
-            return HttpResponseRedirect(settings.LOGIN_URL)
+        if not request.session.has_key('uName'):
+            return render(request, 'Message.html', {'msg': '请先登录!'})

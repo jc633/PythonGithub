@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '10.6.31.21', '127.0.0.1']
 
+# default login url
+LOGIN_URL = '/user/login'
 
 # Application definition
 
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #     'haystack',  # 导入全文检索
+    'haystack',  # 导入全文检索app
     'Product',
     'User',
 ]
@@ -52,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #     'GoodComputer.MyMiddleware.LoginRequiredMiddleware.LoginRequiredMiddleware',
+    'MyMiddleware.LoginRequiredMiddleware.LoginRequiredMiddleware',
     #     'GoodComputer.MyMiddleware.GetImageMiddleware.GetImageMiddleware',
 ]
 
@@ -77,7 +79,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'GoodComputer.wsgi.application'
 
+# haystack配置
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'Product.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+# 自动更新索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+# 自定义的高亮路径
+HAYSTACK_CUSTOM_HIGHLIGHTER = 'Product.templatetags.highlighting.Highlighter'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -124,9 +137,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# default login url
-LOGIN_URL = ''
 
 
 # Static files (CSS, JavaScript, Images)
