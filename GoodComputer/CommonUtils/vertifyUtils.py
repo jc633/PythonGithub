@@ -1,14 +1,13 @@
 # coding:utf-8
 '''
 @Created on :2018-10-14
-@function:定义验证码类
+@function:定义验证码类,生成图片验证码
 @author: jxc
 '''
 import random
 import os
 import string
 import json
-import base64
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 
