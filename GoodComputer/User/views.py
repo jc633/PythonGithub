@@ -41,7 +41,7 @@ def doLogin(request):
         return login(request, '*账号错误或不存在')
     if stringutil.jiemiString(u[0].uPwd) == request.POST.get('password'):
         request.session['uName'] = u[0].uName
-#         request.session.set_expiry(60 * 10)  # 设置失效时间为10分钟
+        request.session.set_expiry(60 * 10)  # 设置失效时间为10分钟
         return HttpResponseRedirect('/user/index')
     return login(request, '*密码错误')
 
