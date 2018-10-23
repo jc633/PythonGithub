@@ -1,11 +1,11 @@
-# GoodComputer（好电脑购物商城） It's a web project that programming with python and django.
+# GoodComputer（好电脑购物商城）     It's a web project that programming with python and django.
 ---
 ### 1.简介
-**&emsp;&emsp;本来是打算用作毕业设计的，但导师说近年来做网站的分数不是很高，加上一个人搞前端+后台+数据库，工作量确实比较大。所以打算暂时搁置了。以后有时间再慢慢雕琢。
-前端:html+jQuery+bootstrap+...
-后台:python+django
-数据库:mysql
-**
+&emsp;&emsp;**本来是打算用作毕业设计的，但导师说近年来做网站的分数不是很高，加上一个人搞前端+后台+数据库，工作量确实比较大。所以打算暂时搁置了。以后有时间再慢慢雕琢。**
+前端:html+jQuery+bootstrap+...       
+后台:python+django        
+数据库:mysql       
+
 
 ### 2.目标
 实现网购商城的基本功能。包括：
@@ -30,13 +30,13 @@
 ...
 
 ### 4.遇到的一些问题及解决方案
-1.登录需求监测(以中间件的方式解决)
-2.密码加解密(参考了网上的一些算法，最后用base64编解码)
-3.图片验证码(原本是直接写了一个函数生成，但扩展性很差，所以写了一个验证码类实现）
-4.前端点击刷新验证码(因浏览器缓存的原因，所以src要时时更换，而图片则放入内存中，便于刷新，验证码内容放入session进行验证)
-5.图片上传预览（看了网上的一些js插件，没有一个是随form表单提交的，于是自己学着写了一个jquery插件来解决,插件位于static/js/upImg.min.js|css/upImg.min.css）
-6.图片存储问题（将图片相对路径存储到数据库,单个图片用ImageFieled解决，但多张图片时无法满足需求，所以自定义了一个ListField解决）
-7.图片懒加载(运用插件echo.min.js)
-8.表单验证(运用插件ValidForm.min.js)
-9.全局检索(最后用了第三方检索app——haystack 实现）
+1.登录需求监测(以中间件的方式解决)               
+2.密码加解密(参考了网上的一些算法，最后用base64编解码)            
+3.图片验证码(原本是直接写了一个函数生成，但扩展性很差，所以写了一个验证码类实现）          
+4.前端点击刷新验证码(因浏览器缓存的原因，所以src要时时更换，而图片则放入内存中，便于刷新，验证码内容放入session进行验证)           
+5.图片上传预览（看了网上的一些js插件，没有一个是随form表单提交的，于是自己学着写了一个jquery插件来解决,插件位于static/js/upImg.min.js|css/upImg.min.css）            
+6.图片存储问题（将图片相对路径存储到数据库,单个图片用ImageFieled解决，但多张图片时无法满足需求，所以自定义了一个ListField解决）                 
+7.图片懒加载(运用插件echo.min.js)        
+8.表单验证(运用插件ValidForm.min.js)        
+9.全局检索(最后用了第三方检索组件——haystack+whoosh 实现）       
 ...
