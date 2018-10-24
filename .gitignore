@@ -102,3 +102,15 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+<<<<<<< HEAD
+
+# Dir
+/pyecharts所生成的网页/
+/中国电影票房排行/
+/数据预处理/
+/每日票房排行(5天数据)/
+/词云图所用背景图片/
+/豆瓣top250/
+
+=======
+>>>>>>> refs/remotes/origin/EasyChart
