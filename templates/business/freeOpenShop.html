@@ -1,0 +1,201 @@
+<style type="text/css">
+/*开店须知*/
+        #u-bar .shopProtocol{
+        	width: 100%;
+        	height: auto;
+        	padding: 20px;
+        	
+        }
+        .readAction{
+        	margin-top: 30px;
+        	height:55px;
+        	width: 100%;
+        	text-align: center;
+        }
+        /*阅读计时器*/
+        .readTime{
+        	display: inline-block;
+        	width: 30px;
+        	height:30px;
+        	line-height: 30px;
+        	border-radius: 15px;
+        	background-color: #22ADE1;
+        	font-size: 14px;
+        	color: #fff;
+        	margin-left: 20px;
+        }
+        /*店铺注册*/
+        #u-bar .shopForm-area{
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          display: none;
+        }
+        .shopForm{
+        	padding: 20px;
+        	margin-left: 90px;
+        }
+        .shopTable .item{
+        	font-size: 16px;
+        	height:60px;
+        	margin-top: 10px;
+        }
+        .shopTable li{
+           float: left;
+           margin-left: 30px;
+
+        }
+        .shopInput{
+           width: 200px;
+        }
+</style>
+     {%load static%}
+     <link rel="stylesheet" type="text/css" href="{%static 'css/upImg.min.css'%}">
+      <script type="text/javascript" src="{%static 'js/upImg.min.js'%}"></script>
+  	<div class="shopProtocol openShop">
+  	<center><h2>开店须知</h2></center>
+  	  <div style="font-size: 16px;margin-left: 30px;line-height: 50px">
+	  	<h3>
+	  	 1、我已经开了一个店了,用别人的账号可以再开一个店吗?</h3>
+
+		<p>答：可以。但事先声明,未经他人允许,使用他人账号所造成的后果由个人承担。</p>
+
+		<h3>2、我可以把店铺转租给其他人吗?</h3>
+
+		<p>答：不可以。本平台不提供转租功能。</p>
+
+		<h3>3、我可以开多个店铺吗?</h3>
+
+		<p>答：可以。但所用的其他账号需经过他人的授权后才能使用。</p>
+
+		<h3>4、我已经开过店铺，现在想要注销原来的店铺重新开店，可以吗?</h3>
+
+		<p>答：不可以，本平台不提供注销店铺的服务。用户一但成功开店就无法再用该账号另开一家店铺。</p>
+	  	</p>
+	  	</div>
+	  	<div class="readAction">
+	  		<button class="btn btn-success stepChange" disabled="disabled">我已了解并同意，继续开店</button><span class="readTime">5s</span>
+	  	</div> 
+
+  	</div>
+  	<div class="shopForm-area openShop">
+  		<h2>商店注册</h2>
+  		<div class="shopForm">
+  		<form  action="{%url 'addShop'%}" method="post" id="shop-form" enctype="multipart/form-data">
+  			 {% csrf_token %}
+             <div class="shopTable">
+             	<div class="item">
+  				<ul>
+  					<li>&emsp;开店人：</li>
+  					<li>
+  						<input class="shopInput form-control" style="cursor: not-allowed;" readonly="readonly" type="text" name="shopOwner" value="{{request.session.uName}}"></li>
+  					<li></li>
+  					<li>&emsp;&emsp;*默认使用用户名</li>
+  				</ul>
+  				</div>
+  				<div class="item">
+  				<ul>
+  					<li>&emsp;店铺名：</li>
+  					<li><input class="shopInput form-control"type="text" name="shopName" id="shopName"></li>
+  					<li></li>
+  					<li>*输入店铺名</li>
+  				</ul>
+  				</div>
+  			    <div class="item" >
+  				<ul>
+  					<li>店铺描述：</li>
+  					<li>
+  						<textarea class="shopInput form-control"style="resize: none;height:80px"maxlength="30" name="shopDesc" id="shopDesc"></textarea>
+  					</li>
+  					<li></li>
+  					<li>*输入6~30字的店铺描述</li>
+  				</ul>
+  				</div>	
+  				<div style="height:250px;margin-top:50px" class="item">
+  				<ul>
+  					<li>店铺头像：</li>
+  					<li>
+  						<input class="shopInput" type="file" name="shopImg" id="upImg">
+  						
+  					</li>
+  					<li></li>
+  					<li>*选择一张图片作为店铺头像</li>
+  				</ul>
+  			    </div>
+  			 </div>
+  			<div style="margin-top: 90px;text-align: center;" >
+  			<input class="btn btn-danger"type="submit" value="确定提交" style="margin-left: -100px">
+  			</div>
+  		</form>
+  		</div>
+  		<button class="btn btn-info stepChange pull-left" style="margin-left: 30px">上一步</button>
+  		<button class="btn btn-info stepChange pull-right" disabled="disabled"  style="margin-right: 30px">下一步</button>
+      <br><br><br><br>
+  	</div>
+    
+  </div>
+ 
+  <script type="text/javascript">
+  	//上一步、下一步切换
+      $('.stepChange').click(function(event) {
+      	var index = $(this).index('.stepChange');
+      	if($(this).text()=='上一步'){
+      		$('.openShop').eq(index-1).show();
+      	    $('.openShop').eq(index).hide();
+      	}
+      	else{
+      		$('.openShop').eq(index+1).show();
+         	$('.openShop').eq(index).hide();
+      	}
+      	
+      });
+      //阅读计时器
+      function readClock() { 	
+      	var str = $('.readTime').text();
+      	var seconds = str.substring(0,str.lastIndexOf('s')); //截取数字
+        if(seconds!=0){
+        	$('.readTime').text(descSeconds(seconds)+'s');	
+        }
+        else{
+            $('.stepChange').eq(0).removeAttr('disabled');
+        }
+        	
+      }  
+      //秒数减1   
+      function descSeconds(sec){
+      	return sec-1;
+      }
+       setInterval(readClock,1000);
+
+      //商店注册表单验证
+      $(function() {
+      	 $('#upImg').upImg({'preWidth':'200','preHeight':'200','size':[50,200]}); //调用自定义的插件
+      	var valid = $("#shop-form").Validform({ //创建表单验证对象
+  			tiptype:2,
+  			showAllError:true,
+  		});
+  		valid.tipmsg.r = "输入有效"; //更改验证通过显示消息
+  		valid.addRule([  //为表单元素创建验证规则
+             {
+             	ele:"#shopName",
+             	datatype:"*2-10", //输入为任意6-16个字符
+             	nullmsg:"请输入店铺名",
+             	errormsg:"店铺名长度为2~10字",             	
+             },
+             {
+             	ele:"#upImg",
+             	datatype:'*',
+             	nullmsg:"请选择图片",
+             },
+             {
+             	ele:"#shopDesc",
+             	datatype:"*6-30", 
+             	nullmsg:"请输入店铺简介",
+             	errormsg:"简介长度在6~30字之间",
+             },
+  			]);
+
+  	
+      });
+  </script>

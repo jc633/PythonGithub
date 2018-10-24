@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>好电脑-信息提示</title>
+	{%load static%}
+</head>
+<body>
+ {%include 'top_bar.html'%}
+ <p msg="{{msg}}" class="news"></p>
+ <div style="margin-top: 150px">
+ <center><h2 id='msg'>没有任何信息</h2></center>
+ </div>
+ <script type="text/javascript">	
+ 	$(function() {
+ 		var msg = $('.news').attr('msg');
+ 		$("#msg").html(msg);
+
+ 	  function jumpLogin() {
+ 	  	if(msg=='请先登录!'){
+ 	  		window.location = '/user/login';
+ 	  	}   
+ 	   }
+ 	   setInterval(jumpLogin,2000);
+ 	});
+ </script>
+</body>
+</html>
