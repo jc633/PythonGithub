@@ -43,10 +43,10 @@
 
 ### 5.网站部分截图
 * 首页                      
-![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220335.png)
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/static/img/projectShortcuts/20181023220335.png)
 * 注册                      
-![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220447.png)
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/static/img/projectShortcuts/20181023220447.png)
 * 登录                      
-![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220513.png)
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/static/img/projectShortcuts/20181023220513.png)
 * 卖家中心                
-![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220939.png)
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/static/img/projectShortcuts/20181023220939.png)
