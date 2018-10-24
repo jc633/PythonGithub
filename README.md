@@ -40,3 +40,13 @@
 - 表单验证(运用插件ValidForm.min.js)        
 - 全局检索(最后用了第三方检索组件——haystack+whoosh 实现）       
 ...
+
+### 5.网站部分截图
+* 首页                      
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220335.png)
+* 注册                      
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220447.png)
+* 登录                      
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220513.png)
+* 卖家中心                
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220939.png)
