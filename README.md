@@ -42,3 +42,4 @@
 ...
 
 ### 5.网站部分截图
+![网站截图](https://github.com/jc633/PythonGithub/blob/GoodComputer/GoodComputer/static/img/projectShortcuts/20181023220335.png)
