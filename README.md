@@ -3,7 +3,7 @@
 ### 1.简介
 &emsp;&emsp;**本来是打算用作毕业设计的，但导师说近年来做网站的分数不是很高，加上一个人搞前端+后台+数据库，工作量确实比较大。所以打算暂时搁置了。以后有时间再慢慢雕琢。**                 
 &emsp;&emsp;* 前端:html+jQuery+bootstrap+...                    
-&emsp;&emsp;* 后台:python+django                
+&emsp;&emsp;* 后台:python 3.6.5+django 2.0.4                
 &emsp;&emsp;* 数据库:mysql                 
 
 
