@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'haystack',  # 导入全文检索app
+    'haystack',  # 导入全文检索app-haystack
     'Product',
     'User',
 ]
