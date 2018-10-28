@@ -1,0 +1,195 @@
+
+<html>
+<head>
+	<title>易图表-首页</title>
+	{%load staticfiles%}
+	<link rel="stylesheet" type="text/css" href="{%static 'css/init.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/animate.min.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'font-awesome-4.7.0/css/font-awesome.min.css'%}">
+
+	<style type="text/css">
+	     body{background-color: #ECE8E8;overflow-x: hidden;}
+	    a:hover{text-decoration: none;}
+	    img{width: 100%;height:100%;}
+	    /*顶部区域*/
+		#head_bar{top:20px;height: 50px;position:absolute;z-index: 10;background-color:transparent;}
+		.head-menu{width: 1300px;margin-left: 30px;height:inherit;color: #fff;}
+		.logo{position:relative;margin-left: 10px;height:inherit;width: 165px;}
+		.logo img{position: absolute;left: 5px;bottom:2px;width: 50%;height:80%;}
+		.logo span{position:absolute;bottom: -2px;right: 0px;font-family: 'SimHei';font-size: 25px;}
+		.menu-area{position:relative;margin-left: 20px;width: 60%;height:inherit;font-size: 16px;float: left}
+		.items{position:absolute;bottom:1px;height: 70%;}
+		.items li{position:relative;margin-left:25px;margin-top:7px;width: auto;height:80%;}
+		.items li:after,.items li:before{content:'';position:absolute;bottom:0;left: 50%;width:0;height:2px;background-color: #fff;transition: all,.5s;}
+		.items li:hover:before{left: 0;width:50%;}
+        .items li:hover:after{left: 50%;width:50%;}
+		.items li a{color: #fff;font-size: 18px;}
+		.head-right-bar{position:absolute;width:250px;height:inherit;right:40px;font-size: 16px}
+		.lg-btn{float:left;width:35%;margin-top:16px;height:60%;line-height:25px;text-align:center;cursor: pointer;margin-left: 20px}
+		.lg-btn:hover{border: 1px solid #EAEAEA;border-radius: 20px;}
+		/*产品特征展示区域*/
+		#feature-bar{position: relative;width: 100%;height:550px;}
+		.feature{position:relative;margin:0;padding:0;height:inherit;background-size:100%;background-repeat: no-repeat;
+			color: #F7F6F6;}
+		.try{position:absolute;right:100px;bottom: 50px;width: 150px;height:50px;z-index: 9;}
+		#try-btn{outline: none;width: inherit;background-color: #F8162D}
+		#try-btn:hover{color: #FFFD2D}
+		.ad-area1{position:absolute;left:100px;bottom:80px;width: 500px;height:80px;font-size: 60px;letter-spacing: 7px;}
+		.ad-area2{position:absolute;right: 50px;top: 160px;width: 300px;height:60px;font-size: 30px;color: #F6F6F8;}
+		/*产品详细展示区域*/
+		#product-bar{width: 100%;height:auto;margin-top: -50px;}
+		.product-infor{position:relative;margin-top:50px;width: inherit;height:450px;background-color: #FCF9F9;padding: 10px;}
+        .short-msg{position:absolute;left: 160px;top: 70px;width:35%;height:75%;padding: 15px;font-size: 18px;display: none;}
+        .utilImg{position:absolute;right: 50px;top: 90px;width:40%;height:75%;display: none;box-shadow: 1px 1px 17px #343333}
+        .stepUtil{position:relative;width: inherit;height:300px;background-color:#1b926c;color: #FDFAFA;margin-top:0px;padding: 30px}
+        .stepCon{position:absolute;left: 160px;bottom: 20px;width:75%;height:65%;padding: 10px;font-size:25px;font-family:'KaiTi','SimHei';display: none;}
+        .con-value{margin-top:20px;width: 250px;margin-left: 80px;float: left} 
+        .con-index{font-size: 25px;background-color:#F9F9F9;color: #0CAA65}
+        .con-text{width: 70%;height:auto;font-size: 16px;margin-top: 10px}
+        .template-bar{position:relative;width: inherit;height:500px;background-color:#F4F3F3;}
+        .template-show-area{position:absolute;left:180px;width: 40%;height: inherit;}
+        .template-item{width: 200px;height:140px;box-shadow: 2px 2px 10px #7E7D7D;margin-left: 40px;margin-top: 25px;float: left}
+        .template-text{position: absolute;right: 50px;top:60px;width: 40%;height:80%;padding: 20px;font-size: 16px;}
+        .goto-top{position:absolute;right: 30px;bottom: 30px;outline: none;display: none;}
+	</style>
+</head>
+<body>
+<div id="head_bar" class="col-sm-12">
+	<div class="head-menu">
+		<div class="logo pull-left">
+			<img src="{%static 'img/menu.png'%}">
+			<span>易图表</span>
+		</div>
+		<div class="menu-area">
+			<div class="items">
+				<li><a href="">图表编辑</a></li>
+				<li><a href="">图表模板</a></li>
+				<li><a href="">帮助文档</a></li>
+				<li><a href="">意见反馈</a></li>
+			</div>
+		</div>
+		<div class="head-right-bar">
+			<div id="reg-btn" class="lg-btn">注册</div>
+			<div id="log-btn" class="lg-btn">登录</div>
+		</div>
+	</div>
+</div>
+	<div id="feature-bar">
+		<div class="feature" v-if='seen1'>
+			<img :src=imgurl[0]>
+			<div class="ad-area1">
+				三步搞定可视化
+			</div>
+		</div>
+		<div class="feature" v-if='seen2'>
+		   <img :src=imgurl[1]>
+		   <div class="ad-area2">
+		   	 多种酷炫模板任意选择
+		   </div>
+		</div>
+		<div class="try"><div class="btn btn-danger btn-lg"  id='try-btn'>立即体验</div></div>
+	</div>
+   <div id=product-bar>
+   	  <div class="product-infor">
+   	  	<center><h2>[[proTit]]</h2></center>
+   	  	<div class="short-msg   slideInLeft animated">
+   	  		<div><h3>简介</h3></div>
+   	  		<div>
+   	  			<p v-for="sg in shortMsg"><i class="fa fa-arrow-circle-o-right"></i>&nbsp;[[sg]]</p>
+            </div>
+   	  	</div>
+   	  	<div class="utilImg slideInRight animated">
+   	  		<img :src=utilUrl>
+   	  	</div>
+   	  </div>
+   	  <div class="stepUtil">
+   	  	<center><h2>[[stepTit]]</h2></center>
+   	  	<div class="stepCon zoomIn animated">
+   	  		<div v-for="(value,key,index) in stepMsg" class="con-value">
+   	  			<span class="badge con-index">[[index+1]]</span>&nbsp;[[key]]
+   	  			<div class="con-text">[[value]]</div>
+   	  		</div>
+   	  	</div>
+   	  </div>
+     <div class="template-bar">
+     		<div class="template-show-area">
+     		 <div @mouseenter="expand" class="template-item" @mouseleave="recover" v-for="n in 6"><img src="{%static 'img/Temp.png'%}"></div>
+     	</div>
+     	<div class="template-text">
+     		<center><h2>[[tempTit]]</h2></center>
+     		<div class="col-sm-offset-2 col-sm-8" style="margin-top:20px">[[tempMsg]]</div>
+     	</div>
+     	<div class="goto-top"><button class="btn btn-success" @click="goto_top">回到顶部</button></div>
+     </div>
+        <div id="bottom-bar" style="position:relative;width:inherit;height:150px;background-color: #162D46;color: #F6F4F4">
+        	<div style="position:absolute;width: 80%;height:60%;font-size: 30px;left: 25%;top:30%">该版本为测试版本，若对本平台有改进意见，欢迎反馈。
+        	</div>
+        </div>
+   </div>
+
+	<script type="text/javascript" src="{%static 'js/vue.js'%}"></script>
+	<script type="text/javascript" src="{%static 'js/jquery-3.3.1.min.js'%}"></script>
+<script type="text/javascript">
+	//页面滚动条触发
+	window.onscroll = function(e){
+		var t=document.documentElement.scrollTop||document.body.scrollTop;
+		var h = $('#head_bar');
+		if(t>200){h.css({'top': '0','background-color': '#1EA47D','position':'fixed'});}
+		else{h.css({'top': '20px','background-color': 'transparent','position':'absolute'});}
+		if(t>350){$('.short-msg').show();$('.utilImg').show();}
+		if(t>600){$('.stepCon').show();}
+		if(t>1200){$('.goto-top').show();}
+	}
+	var fm = new Vue({
+		el: "#feature-bar",
+		data:{
+  			imgurl:["{%static 'img/特色背景1.png'%}","{%static 'img/特色背景2.png'%}"],
+  			seen1:true,
+  			seen2:false,
+  			
+  		},
+  		delimiters:['[[',']]'],//更改vue的语法为[[]],避免与django冲突
+		methods:{
+			changImg(){
+				this.seen1 = this.seen1?false:true;
+				this.seen2 = this.seen2?false:true;
+
+			}
+		}
+	});
+	setInterval(fm.changImg,4000);
+
+	//产品信息
+    var pm = new Vue({
+    	el: "#product-bar",
+    	data:{
+    		proTit:'产品信息',
+    		stepTit:'三步生成图表',
+    		tempTit:'酷炫模板任意选',
+    		shortMsg:['易图表是一个简单、高效的可视化分析平台，致力于为用户提供更简便、快捷的可视化操作','支持数据在线编辑','支持Excel、csv文件上传解析','数十种常用图表和若干高级图表三步生成','支持图表多格式导出'],
+    		utilUrl:"{%static 'img/特色背景1.png'%}",
+    		stepMsg:{
+    		'选择图表':'平台提供了多种图表模板供你选择，总有一款能满足你的需求',
+    		'编辑数据、属性':'在线编辑图表数据,可直接上传Excel、csv文件,系统自动解析',
+    		'生成图表':'万事具备,只需轻点一下,即可生成酷炫图表'},
+    		tempMsg:'平台提供多个免费模板，只需简单地更换数据，即可制作出属于你的酷炫图表。也可以将自己的模板发布到平台供他人使用。',
+    	},
+    	delimiters:['[[', ']]'],
+    	methods:{
+    		expand(e){
+              ;
+    		},
+    		recover(e){
+    			;
+    		},
+    		goto_top(){
+    			document.documentElement.scrollTop=document.body.scrollTop=0; //回到顶部
+    		}
+    	},
+
+    
+    });
+</script>
+</body>
+</html>
