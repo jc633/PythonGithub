@@ -1,0 +1,27 @@
+
+	/*产品特征展示区域*/
+	#feature-bar{position: relative;width: 100%;height:550px;}
+	.feature{position:relative;margin:0;padding:0;height:inherit;background-size:100%;background-repeat: no-repeat;
+		color: #F7F6F6;background-color: #413636;}
+	.try{position:absolute;right:100px;bottom: 50px;width: 150px;height:50px;z-index: 9;}
+	#try-btn{outline: none;width: inherit;background-color: #F8162D}
+	#try-btn:hover{color: #FFFD2D}
+	.ad-area1{position:absolute;left:100px;bottom:80px;width: 500px;height:80px;font-size: 60px;letter-spacing: 7px;}
+	.ad-area2{position:absolute;right: 50px;top: 160px;width: 300px;height:60px;font-size: 30px;color: #F6F6F8;}
+	/*产品详细展示区域*/
+	#product-bar{width: 100%;height:auto;margin-top: -50px;}
+	.product-infor{position:relative;margin-top:50px;width: inherit;height:450px;background-color: #FCF9F9;padding: 10px;}
+        .short-msg{position:absolute;left: 160px;top: 70px;width:35%;height:75%;padding: 15px;font-size: 18px;display: none;}
+        .utilImg{position:absolute;right: 50px;top: 90px;width:40%;height:75%;display: none;box-shadow: 1px 1px 17px #343333}
+        .stepUtil{position:relative;width: inherit;height:300px;background-color:#1b926c;color: #FDFAFA;margin-top:0px;padding: 30px}
+        .stepCon{position:absolute;left: 12%;bottom: 20px;width:85%;height:65%;padding: 10px;font-size:25px;font-family:'KaiTi','SimHei';display: none;}
+        .con-value{margin-top:20px;width:23%;margin-left: 8%;float: left} 
+        .con-index{display:inline-block;width:30px;height:35px;font-size: 25px;background-color:#F9F9F9;color: #0CAA65;text-align: center;border-radius: 6px;}
+        .con-text{width: 70%;height:auto;font-size: 16px;margin-top: 10px}
+        .template-bar{position:relative;width: inherit;height:500px;background-color:#F4F3F3;}
+        .template-show-area{position:absolute;left:14%;width: 40%;height: inherit;}
+        .template-item{width:40%;height:28%;box-shadow: 2px 2px 10px #7E7D7D;margin-left: 40px;margin-top: 12px;margin-bottom:12px;float: left}
+        .template-text{position: absolute;right: 50px;top:60px;width: 40%;height:80%;padding: 20px;font-size: 16px;}
+        .goto-top{position:fixed;right: 30px;bottom: 30px;outline: none;display:none;z-index: 10;}
+        .go-btn{width: 40px;height: 50px;background-color: #E52626;}
+        .go-btn:hover{background-color:#1DA530;}

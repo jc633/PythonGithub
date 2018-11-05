@@ -1,4 +1,13 @@
 eclipse.preferences.version=1
+encoding//CommonUtils/emailUtils.py=utf-8
+encoding//CommonUtils/imgUtils.py=utf-8
 encoding//CommonUtils/sqlUtils.py=utf-8
-encoding//EasyChart/settings.py=utf-8
+encoding//CommonUtils/stringUtils.py=utf-8
+encoding//CommonUtils/vertifyUtils.py=utf-8
+encoding//User/emailService.py=utf-8
+encoding//User/models.py=utf-8
+encoding//User/myBackends.py=utf-8
+encoding//User/urls.py=utf-8
+encoding//User/userUtils.py=utf-8
 encoding//User/views.py=utf-8
+encoding//celery_tasks/tasks.py=utf-8

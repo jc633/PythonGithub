@@ -8,7 +8,7 @@
 from CommonUtils.stringUtils import stringUtil
 import os
 from PIL import Image
-from GoodComputer import settings
+from EasyChart import settings
 # 实例化操作类
 stringutil = stringUtil()
 
@@ -43,6 +43,6 @@ class imgUtil():
         path = os.path.join(dir, self.imgName)  # 保存路径
         try:
             img.save(path)
-            self.change_img_size(path, 0.5)
+#             self.change_img_size(path, 0.5)
         except Exception as e:
             print(e)
