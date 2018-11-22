@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{request.user.uName}}的个人主页</title>
+	{%load static%}
+</head>
+<body>
+	{%include 'top.html'%}
+		<style type="text/css">
+		body{background-color: #FAF9F9}
+		.whiteSpace{width: 100%;height: 200px;margin:0;}
+		.content-bar{width: 1200px;margin:0 auto;height: 600px;margin-top: 70px;padding: 20px}
+		.left-bar{width: 22%;height: inherit;float: left;}
+		.user-infor,.data-bar{width: 100%;padding:10px;font-size: 20px;border-radius: 5px;box-shadow: 0 0 8px #E4E4E4;background-color: #fff}
+		.user-infor{height: 50%;}
+		.data-bar{margin-top: 20px;height: 37%;}
+		.myData{height: 45px;border-bottom: 1px solid #E9E9E9;padding: 10px;}
+		.data{width: inherit;margin-top: 10px;margin-left: 20px;}
+		.data span{display: inline-block;}
+		.data-con{margin-left: 50px;}
+		.user-img{width: 140px;height:140px;margin:0 auto;}
+		.basic-infor{width: 200px;height: auto;margin:0 auto;text-align: center;margin-top: 20px;}
+		.sex{color: #1BB5CC}
+		.right-bar{width:73%;float:right;height: inherit;border:1px solid #EBEBEB; padding: 10px;background-color: #fff}
+		.myUtils{margin:0;width: 100%;height:40px;border-bottom: 1px solid #E0DEDE;font-size: 20px}
+		.util{display: block;width: 25%;height: 100%;text-align: center;}
+		.active{border-bottom: 2px solid #329DF6}
+		.show-content{width: 100%;height: auto;}
+	</style>
+	<div class="content-bar">
+	 <div class="left-bar">
+	 	<div class="user-infor">
+	 		<div class="user-img">
+	 			<img src="{{MEDIA_URL}}{{request.user.uImg}}" class="uImg">
+	 		</div>
+	 		<div class="basic-infor">
+	 			<b>{{user.uName}}</b>&emsp;
+	 			{%if user.uSex%}
+	 			 {%ifequal user.uSex '男'%}
+	 			  <i class="fa fa-mars sex" title="男"></i>
+	 			 {%else%}
+	 			 <i class="fa fa-venus sex" title="女"></i>
+	 			 {%endifequal%}
+	 			{%else%}
+	 			 <i class="fa fa-genderless" title="未知"></i>
+	 			{%endif%}
+	 			<div style="margin-top: 10px">ID:{{user.id}}</div>
+	 			<b><div style="font-size: 16px;margin-top: 10px" >加入时间:<span>{{user.uTime}}</span></div></b>
+	 		</div>
+	 	</div>
+	 	<div class="data-bar">
+	 	 <div class="myData"><strong>我的数据</strong></div>	
+	 	 <div class="data"><span>作品数：</span><span class="data-con">0</span></div>
+	 	 <div class="data"><span>模板数：</span><span class="data-con">0</span></div>
+	 	 <div class="data"><span>收藏量：</span><span class="data-con">0</span></div>
+	 	 <div class="data"><span>总积分：</span><span class="data-con">0</span></div>
+	 	</div>
+	 </div>
+	 <div class="right-bar">
+	 	<div class="myUtils">
+	 		<ul style="height: inherit;">
+	 			<li class="util active"><a href="#">我的作品</a></li>
+	 			<li class="util"><a href="#">我的模板</a></li>
+	 			<li class="util"><a href="#">我的收藏</a></li>
+	 			<li class="util"><a href="#">我的消息</a></li>
+	 		</ul>
+	 	</div>
+	 	<div class="show-content">
+	 		<div style="margin-top: 100px"><h1>什么都没有....</h1></div>
+	 	</div>
+	 </div>
+	</div>
+	<div class="whiteSpace"></div>
+	{%include 'bottom.html'%}
+<script type="text/javascript" src="{%static 'js/common.min.js'%}"></script>
+<script type="text/javascript">
+	$(function() {
+
+		//点击切换util
+		$('.util a').click(function(event) {
+			$(this).parent().addClass('active');
+			$(this).parent().siblings('.util').removeClass('active');
+		});
+	});	
+</script>
+</body>
+</html>

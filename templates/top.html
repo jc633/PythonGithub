@@ -6,7 +6,7 @@
 <style type="text/css">
        a:link,a:hover,a:visited{text-decoration: none;}
 	 /*顶部区域*/
-		#head_bar{top:0;height: 50px;position:absolute;z-index: 10;background-color:#1EA47D;}
+		#head_bar{top:0;height: 50px;position:fixed;z-index: 10;background-color:#1EA47D;}
 		#head_bar1{top:20px;height: 50px;position:absolute;z-index: 10;background-color:transparent;}
 		.head-menu{width: 1300px;margin-left: 30px;height:inherit;color: #fff;}
 		.logo{position:relative;margin-left: 10px;height:inherit;width: 165px;}
@@ -21,7 +21,8 @@
 		.items li a{color: #fff;font-size: 18px;}
 		.head-right-bar{position:absolute;width:250px;height:inherit;right:40px;font-size: 16px}
 		.head-right-bar a{color: #fff;}
-		.userImg{width:40px;height: 40px;border-radius: 50%;margin-top:6px}
+		.userImg{width:40px;height: 40px;border-radius: 50%;margin-top:6px;border: 2px solid #F1F1F1}
+		.uImg{border-radius: 50%;}
 		.uName{position: absolute;bottom: 10px;margin-left: 6px;}
 		.lg-btn{float:left;width:35%;margin-top:16px;height:60%;line-height:25px;text-align:center;cursor: pointer;margin-left: 20px}
 		.lg-btn:hover{border: 1px solid #EAEAEA;border-radius: 20px;}
@@ -39,18 +40,18 @@
 		</div>
 		<div class="menu-area">
 			<div class="items">
-				<li><a href="">图表编辑</a></li>
-				<li><a href="">图表模板</a></li>
-				<li><a href="">帮助文档</a></li>
-				<li><a href="">意见反馈</a></li>
+				<li><a href="#">图表编辑</a></li>
+				<li><a href="#">图表模板</a></li>
+				<li><a href="#">帮助文档</a></li>
+				<li><a href="{%url 'feedBack'%}">意见反馈</a></li>
 			</div>
 		</div>
 		<div class="head-right-bar">
 			{%if request.user.is_authenticated%}
             <div class="infor-bar"><img src="{{MEDIA_URL}}{{request.user.uImg}}" class="userImg"><span class="uName">{{request.user.uName}},欢迎你</span><br>
             	<div class="util-panel">
-            		<div class="util-item"><a href="{%url 'utilDeal' request.user.uId 'myPage'%}">个人主页</a></div>
-            		<div class="util-item"><a href="{%url 'utilDeal' request.user.uId 'accoutSet'%}">账号设置</a></div>
+            		<div class="util-item"><a href="{%url 'myPage'%}">个人主页</a></div>
+            		<div class="util-item"><a href="{%url 'accountSet'%}">账号设置</a></div>
             		<div class="util-item"><a href="{%url 'logout'%}">退出登录</a></div>
             	</div>
             </div>
@@ -72,4 +73,6 @@
 	$('.infor-bar').mouseleave(function(event) {
 		$('.util-panel').hide();
 	});
+	//更改用户头像地址
+	$('.uImg').attr('src', '/user/get_user_img/'+Math.random()*10000);
 </script>

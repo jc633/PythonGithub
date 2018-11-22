@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{%block title%}重置密码-易图表{%endblock%}</title>
+	{%load static%}
+	<style type="text/css">
+		body{background-color: #F3F2F2}
+		.reset-bar{width: 100%;height: auto;margin-top: 100px}
+		.resetArea{width: 1100px;height: 400px;margin:0 auto;padding: 10px}
+		.form-bar{width: 30%;margin:0 auto;height: 70%;}
+		.infor-input{position:relative;margin-top: 30px;margin-left: 10px}
+		#vertify-btn,#alter-btn{outline: none;position:absolute;right: -118px;top:0px;}
+		#handle-btn{font-size: 22px;}
+		#tip-message{width:fit-content;width:-webkit-fit-content;width:-moz-fit-content;background-color: #DF2529;font-size: 16px;color: #fff;display: none;}
+	</style>
+</head>
+<body>
+	{%include 'top.html'%}
+	<div class="reset-bar">
+		<center><div class="alert animated fadeInDown" id="tip-message">请注意,验证链接十分钟内有效!</div></center>
+		<div class="resetArea">
+			<center><h2>{%block util%}重置密码{%endblock%}</h2></center>
+		 	<div class="form-bar">
+		 		{%block form%}
+		 		<form id="resetForm" method="post">
+		 			{%csrf_token%}
+		 			{%if resetVertify_pass%}
+		 			<div class="col-sm-11 infor-input">
+		 				<input type="password"  name="newPwd" class="form-control" placeholder="输入新密码(6~16位字符)" autocomplete="new-password" id="newPwd">
+		 			</div>
+		 			<div class="col-sm-11 infor-input">
+		 				<input type="password" class="form-control" placeholder="确认新密码" autocomplete="new-password" id="confirmPwd">
+		 			</div>
+		 			<div class="col-sm-11 infor-input">
+		 				<button class="btn btn-danger col-sm-12" id="handle-btn" type="button">确定提交</button>
+		 			</div>
+		 			{%else%}
+		 			<div class="col-sm-11 infor-input">
+		 				<input type="text" name="email" id="email" placeholder="请输入邮箱账号" class="form-control" autocomplete="off">
+		 				<button id="vertify-btn" class="btn btn-default" type="button">获取验证链接</button>
+		 			</div>
+		 			{%endif%} 
+		 		</form> 
+		 		{%endblock%}
+		 	</div>
+		</div>
+	</div>
+<script type="text/javascript" src="{%static 'js/common.min.js'%}"></script>
+ {%block js%}<script type="text/javascript" src="{%static 'js/resetPwd.min.js'%}"></script>{%endblock%}
+</body>
+</html>

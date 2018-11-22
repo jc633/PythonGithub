@@ -1,0 +1,41 @@
+{%extends 'resetPwd.html'%}
+{%block title%}修改邮箱{%endblock%}
+{%block util%}修改邮箱{%endblock%}
+{%block form%}
+<form id="resetForm" method="post">
+		{%csrf_token%}
+	{%if alterVertify_pass%}
+	<div class="col-sm-11 infor-input">
+		<input type="text" name="email" id="email" placeholder="请输入新邮箱地址" class="form-control" autocomplete="off">
+		<button id="alter-btn" class="btn btn-default" type="button">获取激活链接</button>
+	</div>
+	{%else%}
+	 <center><h3>请先进行身份验证...</h3></center>
+	{%endif%}
+</form>
+{%endblock%}
+{%block js%}
+<script type="text/javascript">
+	//确认提交
+	var email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/; //验证邮箱
+   $('#alter-btn').click(function(event) {
+   	  var eVal = $('#email').val();
+   	  if(email.test(eVal)){
+   	  	$.ajax({
+   	  		url:'/user/send/email/bandEmail',
+   	  		type:'POST',
+   	  		datatype:'text',
+   	  		data:$('#resetForm').serialize(),
+   	  		success:function(con){
+   	  			if(con=='发送成功'){msg.text('激活链接已发到你的新邮箱,请前往邮箱按照指示操作!');showMsg();close_current_page(5000);}
+   	  			else{msg.text(con);showMsg();}
+   	  		},
+   	  		error:function(){
+   	  		   msg.text('请求失败,请稍后再试');showMsg();
+   	  		},
+   	  	});
+   	  }
+   	  else{msg.text('邮箱不符合要求!');showMsg();}
+   });
+</script>
+{%endblock%}

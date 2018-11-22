@@ -6,6 +6,7 @@
 '''
 from django.db.models import Q
 
+
 class sqlUtil():
     def __init__(self, model):
         self.model = model
@@ -22,13 +23,13 @@ class sqlUtil():
 
     # 查询记录
     def select(self, args, **kwargs):
+        if 'order_by' in kwargs:
+            self.order_by = kwargs['order_by']
         if args:
             if isinstance(args, dict):
                 q = Q()  # 创建Q对象
                 if 'connect_type' in kwargs:
                     q.connector = kwargs['connect_type']
-                if 'order_by' in kwargs:
-                    self.order_by = kwargs['order_by']
                 for k, v in args.items():
                     q.children.append((k, v))  # 组合查询条件
                 try:
@@ -38,4 +39,16 @@ class sqlUtil():
                     print(e)
                     return None
             raise TypeError('请输入一个字典参数,如{"id":id}')
-        return self.model.objects.all()
+        return self.model.objects.all().order_by(self.order_by)
+
+    # 删除记录
+    def delete(self, obj_id):
+        if obj_id:
+            if isinstance(obj_id, dict):
+                try:
+                    self.objects.filter(**obj_id).delete()
+                    return True
+                except BaseException as e:
+                    print(e)
+            raise AttributeError('请传入一个对象id字典')
+        return False

@@ -1,3 +1,4 @@
+# coding:utf-8
 """EasyChart URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -16,12 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf.urls import url
 from User import views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.static import serve
+import xadmin
+xadmin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('xadmin/', xadmin.site.urls),
     path('index', views.index, name='index'),
     path('user/', include('User.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # ����media·��
+    path('Inform/', include('Inform.urls')),
+    #     url(r'^static/(?P<path>.*)$', serve,
+    #         {'document_root': settings.STATIC_ROOT}),  # debug=true时的static配置方式
+    #     url(r'^media/(?P<path>.*)$', serve,
+    #         {'document_root': settings.MEDIA_ROOT})  # debug=true时的media配置方式
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Debug=true时，添加media路径的方式

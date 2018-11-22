@@ -1,87 +1,57 @@
 <!DOCTYPE>
 <html>
 <head>
-	<title>账户激活</title>
+	<title>账号激活-易图表</title>
+	{%load static%}
 	<style type="text/css">
 		.activeArea{width: 100%;height:auto;margin-top: 150px}
 		.message{font-size: 25px;width:850px}
 		.resend{display: none;font-size: 18px}
-		#hand-btn{width: 72%;margin-left: 26%;font-size: 18px}
-		#success-notice{display: none;margin-top: 10px;width: 320px;}
+		#handle-btn{width: 72%;margin-left: 26%;font-size: 18px}
+		#tip-message{width:fit-content;width:-webkit-fit-content;width:-moz-fit-content;background-color: #DF2529;font-size: 16px;color: #fff;display: none;}
 	</style>
 </head>
 <body>
 	{%include 'top.html'%}
-	
 	<div class="activeArea">
 		<div class="success">
 		<center>
+		 {%ifequal resend '0' %}
 		 <h1>注册成功</h1><br>
-		 <div class="alert alert-success message">我们已将激活邮件发到你的注册邮箱中，请前往邮箱按照指示激活账号</div>
-		 <div class="alert alert-info message">若3分钟内没有收到激活邮件,<button class="btn btn-danger" id="resendEmail">请点这里重新获取</button></div>
+		 <div class="alert alert-success message">
+		 系统已将激活邮件发到你的注册邮箱中，请前往邮箱按照指示激活账号
+		</div>
+		 {%else%}
+		 <div></div>
+		 {%endifequal%}
+		 <div class="alert alert-info message">若3分钟内没有收到激活邮件或邮件失效,<button class="btn btn-danger" id="resendEmail">请点这里重新获取</button></div>
 		 <div class="alert alert-danger message">请注意:激活邮件的有效时间为3天，若3天内未激活，则需要重新注册!</div>
 		</center>
 		</div>
 		<div class="resend">
 			<center>
-				<div class="alert alert-success animated fadeInDown" id="success-notice">
-				<a href="#" class="close" data-dismiss="alert">&times;</a>
-				<strong>发送成功!</strong>请前往你的邮箱查看
-				</div>
-				<h1>重发邮件</h1>
+				<div class="alert animated fadeInDown" id="tip-message"></div>
+				<h1>重发激活邮件</h1>
 				<form method="post" action="#" class="form-horizontal"style="width: 300px;margin-top: 60px" id="resendForm">
 				{%csrf_token%}
 				<div class="form-group" >
 					<label for="email" class="control-label col-sm-3">邮箱</label>
-					<div class="col-sm-9"><input type="text" name="email" class="form-control" id="email" placeholder="输入你注册的邮箱"></div>
+					<div class="col-sm-9"><input type="text" name="email" class="form-control" id="email" placeholder="输入你注册的邮箱" autocomplete="off"></div>
 				</div>
 				<div class="form-group">
 					<label for="password" class="control-label col-sm-3">密码</label>
 					<div class="col-sm-9">
-						<input type="password" name="password" class="form-control" id="password" placeholder="输入注册的密码">
+						<input type="password" name="password" class="form-control" id="password" placeholder="输入注册的密码" autocomplete="off">
 					</div>
 					<br><br>	
 				</div>
-				<input type="button" value="确定提交" class="btn btn-primary" id="hand-btn" >
+				<input type="button" value="确定提交" class="btn btn-primary" id="handle-btn" >
 			</form>
 
 		</center>
 		</div>
 	</div>
+	<script type="text/javascript" src="{%static 'js/common.min.js'%}"></script>
+	<script type="text/javascript" src="{%static 'js/activeAccount.min.js'%}"></script>
 </body>
-   <script type="text/javascript">
-   	    //更改顶部css
-	    $('#head_bar1').attr('id', 'head_bar');
-
-	    var to_login = function(){
-	    	window.location.href='/user/sign/act=login';
-	    }
-	    $('#resendEmail').on('click', function(event) {
-	    	$('.success').hide();
-	    	$('.resend').show();
-	    });
-	    $('#hand-btn').click(function(event) {    	
-	    	var email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-	    	var pwd = /^[a-zA-Z0-9]{6,16}/;
-	    	if(email.test($('#email').val())&&pwd.test($('#password').val())){
-	    		$.ajax({
-	    			url:'/user/send/activeEmail/',
-	    			type:'POST',
-	    			datatype:'text',
-	    			data:$('#resendForm').serialize(),
-	    			success:function(msg){	
-	    				if(msg=='发送成功'){$('#success-notice').show();}
-	    				else{alert(msg);}
-	    			},
-	    			error:function(){
-	    				console.log('请求失败');
-	    			},
-	    		});
-	    	}
-	    	else{
-	    		alert('邮箱或密码不符合要求!')	
-	    	}
-	    	
-	    });
-   </script>
 </html>

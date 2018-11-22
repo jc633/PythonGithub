@@ -1,0 +1,29 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>信息提示-易图表</title>
+	<style type="text/css">
+		.infor{width: 100%;height: 200px;margin-top: 300px}
+	</style>
+</head>
+<body>
+	{%include 'top.html'%}
+	<div class="infor">
+	<center>
+		{%if msg%}
+		 <h2 class="message">{{msg|safe}}</h2>
+		{%else%}
+		 <h2>暂时没有什么信息提示....</h2>
+		{%endif%}
+	</center>
+	</div>
+<script type="text/javascript">
+	//更改顶部css
+	 $('#head_bar1').attr('id', 'head_bar');
+ 	 var to_login = function(){window.location.href='/user/sign/act=login';}
+ 	 var to_userSet = function(){window.location.href='/user/util/accountSet';}
+	 if($('.message').text().indexOf('登录页面')!=-1){setTimeout(to_login,3000);}
+	 if($('.message').text().indexOf('设置页面')!=-1){setTimeout(to_userSet,3000);}
+</script>
+</body>
+</html>

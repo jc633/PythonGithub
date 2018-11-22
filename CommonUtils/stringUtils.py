@@ -28,7 +28,11 @@ class stringUtil():
 
     # 获取当前时间戳
     def getTimeStamp(self):
-        return str(time.time())
+        return int(time.time())
+
+    # 将时间戳转成常见格式
+    def strTimeStamp(self, stamp, c):
+        return time.strftime('%Y' + c + '%m' + c + '%d' + ' %H:%M', time.localtime(stamp))
 
     # 获取md5加密字符串
     def get_md5_string(self, value):
@@ -51,3 +55,16 @@ class stringUtil():
             s = base64.b32decode(value).decode()
             return s
         raise TypeError('所传值为空:%s' % value)
+
+    # 对隐私信息进行特殊处理
+    def private_infor_protect(self, value, start, end, c='*'):
+        if isinstance(value, str):
+            if start < 0:
+                start = 0
+            if end > len(value):
+                end = len(value)
+            if start > end:
+                start, end = end, start
+            s = value.replace(value[start:end], c * (end - start))
+            return s
+        raise TypeError('需要一个字符串参数')

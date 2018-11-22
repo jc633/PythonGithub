@@ -18,7 +18,7 @@
         .con-value{margin-top:20px;width:23%;margin-left: 8%;float: left} 
         .con-index{display:inline-block;width:30px;height:35px;font-size: 25px;background-color:#F9F9F9;color: #0CAA65;text-align: center;border-radius: 6px;}
         .con-text{width: 70%;height:auto;font-size: 16px;margin-top: 10px}
-        .template-bar{position:relative;width: inherit;height:500px;background-color:#F4F3F3;}
+        .template-bar{position:relative;width: inherit;height:500px;background-color:#F4F3F3;overflow: hidden;}
         .template-show-area{position:absolute;left:14%;width: 40%;height: inherit;}
         .template-item{width:40%;height:28%;box-shadow: 2px 2px 10px #7E7D7D;margin-left: 40px;margin-top: 12px;margin-bottom:12px;float: left}
         .template-text{position: absolute;right: 50px;top:60px;width: 40%;height:80%;padding: 20px;font-size: 16px;}

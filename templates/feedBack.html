@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>意见反馈-易图表</title>
+	{%load static%}
+	
+</head>
+<body>
+  {%include 'top.html'%}
+   <style type="text/css">
+  	#tip-message{width:fit-content;width:-webkit-fit-content;width:-moz-fit-content;background-color: #DF2529;font-size: 16px;color: #fff;display:none;margin-top: 30px;}
+  	button{outline: none;}
+  	.suggest-bar{width: 1200px;height: 500px;margin:0 auto;margin-top: 60px;padding: 20px;}
+  	.left-bar{height: 400px;float: left;position: fixed;}
+  	.right-bar{height: 400px;float: right;}
+  	.form-bar{width: 100%;height: inherit;padding: 10px;font-size: 18px}
+  	#suggestForm{width: inherit;height:auto;margin-top: 10px}
+  	.content{width:inherit;height: 200px;resize: none;border-radius: 5px;outline: none;border:1px solid #868788;}
+  	.content:focus{border:2px solid #56D6A6;}
+  	.content-list li{display:inline-block;float: none;width:100%;height:auto;font-size:16px;color: #B8B6B6;}
+  	.content-list li img{border-radius: 50%;}
+  	.user-img{width:45px;height: 45px;}
+  	.user-reply-img{width: 35px;height: 35px;}
+  	.con-head{width: inherit;height: 50px;}
+  	.con-desc{width: 90%;height: auto;color: #918F8F;margin-left: 30px;}
+  	.act{margin-left: 10px;cursor: pointer;}
+	.act a:hover{color: #F04936;}
+  </style>
+  <div class="suggest-bar" id="feedBack">
+  	<div class="left-bar col-sm-12 col-lg-3">
+  		<div class="form-bar">
+  			<span style="font-size: 16px"><strong>建议|吐槽|评论都接受(5~100字之间)</strong></span>
+  			<form id="suggestForm" action="#">
+  				<input type="hidden" name="type" :value="inforType">
+  				<textarea name="content"class="content" :placeholder="placeholder" minlength="5" maxlength="100" v-model="handCon"></textarea>
+  				<button class="btn btn-default" @click="cancelReply" type="button" style="outline: none;">取消</button>
+  				<button type="button" class="btn btn-success"  @click='handSuggestion' style="outline: none;">确定提交</button>
+  			</form>
+  			<div class="alert animated fadeInDown" id="tip-message"></div>
+  		</div>
+  	</div>
+  	<div class="right-bar col-sm-12 col-lg-8">
+  		<div class="panel panel-success" style="box-shadow: 5px 5px 10px #D0CFCF">
+		    <div class="panel-heading">
+		        <span class="panel-title">最新反馈</span>
+		    </div>
+		    <div class="panel-body">
+		    	<h4>显示最近的20条留言反馈</h4>
+		    </div>
+		     <ul class="list-group content-list" id="contentList">
+		     	   <li class="list-group-item" v-if="loading"><i class="fa fa-spin fa-circle-o-notch"></i>数据正在加载...</li>
+		     	   <li class="list-group-item" v-if="hasData==false">竟然没人反馈？快来成为第一个支持者吧!</li>
+				  
+		     </ul>
+		</div>
+  		
+  	</div>
+  </div>
+ <script type="text/javascript" src="{%static 'js/vue-resource.min.js'%}"></script>
+ <script type="text/javascript">
+ 	$(document).ready(function() {
+		$('#head_bar1').attr('id', 'head_bar');
+
+		//意见反馈数据绑定
+		Vue.http.options.emulateJSON = true;
+		var cL = new Vue({
+			el: "#feedBack",
+			data:{
+				loading:true,
+				hasData:null,
+				handCon:'',
+				recId:null,
+				replyed_mId:null,
+				currentId:{{request.user.id|safe}},
+				inforType:'意见反馈',
+				placeholder:'请输入你的建议、评论或吐槽...',
+				handUrl:'http://10.6.31.21:8000/user/suggest/',
+				dataUrl:'http://10.6.31.21:8000/user/loading/feedBack',
+			},
+			delimiters:['[[',']]'],//更改vue的语法为[[]],避免与django冲突
+			mounted:function(){this.getData();},
+			methods:{ 
+			    showMsg:function(con){
+			   		 //如果有提示
+	   				 var msg = $('#tip-message');
+			    	 if(con!=''){msg.html(con);msg.show();setTimeout(function(){msg.slideUp(200);},4000);}
+			    },
+			    cancelReply:function(){
+			    	var vm = this;
+			    	vm.handCon = '';
+			    	vm.replyed_mId = null;
+			    	vm.recId = null;
+			    	vm.placeholder = '请输入你的建议、评论或吐槽...';
+			    },
+				handSuggestion:function(){
+					var vm  = this;
+					var params = $(this.$el).find('#suggestForm').serialize()+'&recId='+vm.recId+'&replyed_mId='+vm.replyed_mId;
+					if(vm.handCon.length>=5){
+						$.ajax({
+						url:vm.handUrl,
+						type:'GET',
+						datatype:'text',
+						data:params,
+						success:function(con){
+							if(con.indexOf('成功')!=-1){vm.getData();vm.cancelReply();}
+							vm.showMsg(con);
+						},
+						error:function(){console.log('请求失败');},
+					});
+				  }else{vm.showMsg('字数不符合要求!')}
+					
+				},
+				//获取反馈数据
+				getData:function(){
+					var vm = this;
+					vm.$http.get(this.dataUrl).then(function(response){
+						vm.loading = false;
+						var data = response.body;
+						if(data.length>0){vm.hasData=true;$('#contentList').html('');}else{vm.hasData=false}	
+						for(var i=0;i<data.length;i++){
+							for(var j=0;j<data[i].length;j++){
+								 for(var key in data[i][j]){
+								 	if(key=='parent'){this.generateHtml(data[i][j][key],'#contentList','user-img');}
+								 	else{
+								 		for(var k=0;k<data[i][j][key].length;k++){
+								 		this.generateHtml(data[i][j][key][k],'#'+key,'user-reply-img');
+								 		}
+								 		
+								 	}
+								 }
+							}
+						}
+					},function(response){
+						alert(response);
+					}).catch(function(response){console.log(response);});
+				},
+
+				//生成列表的html
+				generateHtml:function(obj,parentCode,userImgClass){
+					obj.time = getDateDiff(obj.time);
+					var reply = '';
+					var act = '';
+					// if(obj.sId==this.currentId){
+					// 	act='<span class="act deleteAct"><a href="#"><i class="fa fa-trash"></i>&nbsp;删除</a></span>'}
+					if(obj.sId!=this.currentId){act='<span class="act replyAct"><a href="javascript:;"><i class="fa fa-edit" ></i>&nbsp;回复</a></span>'}
+					if(obj.rName){var reply='<span>&emsp;回复&emsp;</span>'+
+		        				'<img src='+obj.rImg+' class='+userImgClass+'>'+
+		        				'<span class="con-head-name">'+obj.rName+'</span>';}
+					var html = '<li class="list-group-item" Id='+obj.mId+' data-sId='+obj.sId+' data-replyname='+obj.sName+'><div class="con-head">'+
+		        			'<div class="pull-left">'+
+		        				'<img src='+obj.sImg+' class='+userImgClass+'>'+
+		        				'<span class="con-head-name">'+obj.sName+'</span>'+reply+'</div>'+
+		        			'<div class="pull-right time">'+obj.time+'</div>'+
+		        		'</div>'+
+		        		'<div class="con-desc">&emsp;&emsp;'+
+		        			obj.content+
+		        		'</div>'+
+		        		'<div class="con-utils pull-right">'+
+		        			 act+
+		        			'</div>'+
+		        			'</li>'
+					$(parentCode).append(html);
+
+
+				},
+				//回复
+				userReply:function(mId,recId,name){
+					var vm  = this;
+					vm.replyed_mId = mId;
+					vm.recId = recId;
+					vm.placeholder = '@'+name;
+					$('.content').focus();
+				},
+			},
+			});
+		//点击回复
+		$(document).on('click','.replyAct',function(event) {
+			var li = $(this).parent('.con-utils').parent('.list-group-item');
+			var mId = li.attr('id');
+			var recId = li.attr('data-sId');
+			var name = li.attr('data-replyname');
+			cL.userReply(mId,recId,name);
+
+		});
+		//将时间戳转换成几分钟前、几小时前、几天前...的形式
+		function getDateDiff(dateTimeStamp){
+			var dateTimeStamp = parseInt(dateTimeStamp)*1000;
+			var minute = 1000 * 60;
+			var hour = minute * 60;
+			var day = hour * 24;
+			var halfamonth = day * 15;
+			var month = day * 30;
+			var year = month*12;
+			var now = new Date().getTime();
+			var diffValue = now - dateTimeStamp;
+			if(diffValue < 0){return;}
+			var yearC = diffValue/year;
+			var monthC =diffValue/month;
+			var weekC =diffValue/(7*day);
+			var dayC =diffValue/day;
+			var hourC =diffValue/hour;
+			var minC =diffValue/minute;
+			if(yearC>=1){result=""+parseInt(yearC)+"年前";}
+			else if(monthC>=1){result="" + parseInt(monthC) + "月前";}
+			else if(weekC>=1){result="" + parseInt(weekC) + "周前";}
+			else if(dayC>=1){result=""+ parseInt(dayC) +"天前";}
+			else if(hourC>=1){result=""+ parseInt(hourC) +"小时前";}
+			else if(minC>=1){result=""+ parseInt(minC) +"分钟前";}
+			else{result="刚刚";}
+			return result;
+		}
+   });
+ </script>
+</body>
+</html>

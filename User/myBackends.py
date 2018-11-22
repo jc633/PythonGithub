@@ -6,18 +6,17 @@
 '''
 from User.models import user
 from django.contrib.auth.backends import ModelBackend
-from CommonUtils.stringUtils import stringUtil
 from django.db.models import Q
-stringutil = stringUtil()
+
 
 class CustomLoginBackend(ModelBackend):
     def authenticate(self, account=None, password=None):
         try:
-            u = user.objects.get(Q(uPhone=account) | Q(uEmail=account))
+            u = user.objects.get(uEmail=account)
         except user.DoesNotExist:
             return None
         else:
-            if password == stringutil.jiemiString(u.password):
+            if u.check_password(password):
                 return u
             else:
                 return None
