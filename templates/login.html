@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
+        body{background-color: #feffe9}
+        #login{
+            width: 300px;
+            height:250px;
+            margin: 0 auto;
+            margin-top: 150px;
+            border: 1px solid gray;
+            padding: 10px;
+            background-color:#ffffff;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.79);
+        }
+        .login-bar{
+            width: inherit;
+            height: inherit;
+
+        }
+         .login-tit{width: inherit;height: 50px;text-align: center;}
+         .login-item{width: inherit;height: 40px;margin-top: 8px;padding:0 5px 0 5px;text-align: center}
+         .login-item>label{width: 70px;text-align: right;display: inline-block}
+    </style>
+</head>
+<body>
+    <div id="login">
+        <div class="login-bar">
+            <form method="post" action="">
+                <div class="login-tit"><h2>登录</h2></div>
+                <div class="login-item"><label for="">用户名：</label><input type="text" class="login-input"></div>
+                <div class="login-item"><label for="">密 码：</label><input type="password" class="login-input"></div>
+                <div class="login-item">
+                    <input type="submit" value="login">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
