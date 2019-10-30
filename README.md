@@ -1,2 +1,2 @@
 # flaskStudy
-**这是一个简单的flask学习项目**
+**这是一个简单的flask练习**
