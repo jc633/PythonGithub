@@ -1,11 +1,21 @@
 from flask import Flask, escape, url_for,render_template,redirect,request,make_response,session,abort,flash
 from werkzeug.utils import secure_filename #过滤文件名中的敏感字符
+from flask_mail import Message,Mail #导入邮件类、消息类
 import os
 
 app = Flask(__name__)
 app.secret_key = 'cyf I love you' #session加密
 app.config['UPLOAD_FOLDER']= 'media/' #文件上传存储路径
 app.config['MAX_CONTENT_PATH'] = 1*1024*1024 #上传文件最大体积，以字节为单位
+
+#邮箱配置
+app.config['MAIL_SERVER']='smtp.139.com'  #服务器
+app.config['MAIL_PORT'] = 465  #端口
+app.config['MAIL_USERNAME'] = 'jxc516@139.com' #用户名
+app.config['MAIL_PASSWORD'] = 'jxc@120702mail' #密码
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app) #邮件对象
 
 '''热加载html'''
 app.jinja_env.auto_reload = True
@@ -84,6 +94,22 @@ def dealUpload():
         return '上传成功！！'
     else:
         pass
+
+#邮件发送
+@app.route('/mail')
+def ToMail():
+    return render_template('sendMail.html')
+
+@app.route('/sendMail',methods=['POST','GET'])
+def sendMail():
+    if request.method=='POST':
+        subject = request.form['subject']
+        sendPeople = request.form['sendPeople']
+        content = request.form['content']
+        msg = Message(subject=subject,recipients=[sendPeople],body=content,sender='jxc516@139.com')
+        mail.send(msg)
+        return '发送成功'
+    return '我爱你'
 
 @app.route('/hello_cyf/<act>')
 def hello_cyf(act):
