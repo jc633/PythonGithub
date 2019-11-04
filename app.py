@@ -1,16 +1,23 @@
-from flask import Flask, escape, url_for,render_template,redirect,request,make_response
-
+from flask import Flask, escape, url_for,render_template,redirect,request,make_response,session,abort,flash
+from werkzeug.utils import secure_filename #过滤文件名中的敏感字符
+import os
 
 app = Flask(__name__)
+app.secret_key = 'cyf I love you' #session加密
+app.config['UPLOAD_FOLDER']= 'media/' #文件上传存储路径
+app.config['MAX_CONTENT_PATH'] = 1*1024*1024 #上传文件最大体积，以字节为单位
 
 '''热加载html'''
 app.jinja_env.auto_reload = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-@app.route('/index/<name>')
-def index(name):
-    return render_template('index.html',name=name)
+@app.route('/index')
+def index():
+    if 'username' in  session:
+        uname = session['username']
+        pwd = session['pwd']
+    return render_template('index.html',uname = uname,password = pwd)
 
 @app.route('/login')
 def login():
@@ -21,10 +28,21 @@ def dealLogin():
     if request.method == 'POST':
         name = request.form['username']
         password = request.form['password']
-        return render_template('index.html',name=name,password=password)
+        if name == '陈伊凡' and password == 'jxc':
+            session['username'] = name
+            session['pwd'] = password
+            flash('登录成功','error')
+            return redirect(url_for('index'))
+        else:
+            abort(400)
     else:
         name = request.args.get('name')
         return redirect(url_for('index',name=name))
+
+@app.route('/logout')
+def logout():
+    session.pop('username',None)
+    return redirect('login')
 
 @app.route('/setcookie',methods=['POST','GET'])
 #设置cookie
@@ -51,6 +69,21 @@ def test():
 @app.route('/user/<username>')
 def profile(username):
     return redirect(url_for('hello_cyf',act='love'))
+
+#文件上传测试
+@app.route('/upload')
+def upload():
+    return render_template('upload.html')
+
+@app.route('/dealUpload',methods = ['GET', 'POST'])
+def dealUpload():
+    if request.method == 'POST':
+        img = request.files['uImg']
+        savePath = os.path.join(app.config['UPLOAD_FOLDER'],img.filename)
+        img.save(savePath)
+        return '上传成功！！'
+    else:
+        pass
 
 @app.route('/hello_cyf/<act>')
 def hello_cyf(act):

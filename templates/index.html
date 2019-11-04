@@ -5,6 +5,16 @@
     <title>flask测试文件</title>
 </head>
 <body>
-  {{ name}}，{{ password }}
+   {% with messages = get_flashed_messages() %}
+     {% if messages %}
+        <ul>
+           {% for message in messages %}
+           <li>{{ message }}</li>
+           {% endfor %}
+        </ul>
+     {% endif %}
+  {% endwith %}
+  {{ uname}}，{{ password }}
+  <a href="/logout">退出登录</a>
 </body>
 </html>
