@@ -21,6 +21,9 @@ mail = Mail(app) #邮件对象
 app.jinja_env.auto_reload = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+'''热加载静态资源，修改缓存时间'''
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 'timedelta(seconds=1)'
+
 
 @app.route('/index')
 def index():
@@ -110,6 +113,11 @@ def sendMail():
         mail.send(msg)
         return '发送成功'
     return '我爱你'
+
+#小二货的立体相册
+@app.route('/myGirl')
+def myGirl():
+    return render_template('girl.html')
 
 @app.route('/hello_cyf/<act>')
 def hello_cyf(act):
