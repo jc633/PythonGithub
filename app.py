@@ -114,11 +114,6 @@ def sendMail():
         return '发送成功'
     return '我爱你'
 
-#小二货的立体相册
-@app.route('/myGirl')
-def myGirl():
-    return render_template('girl.html')
-
 @app.route('/hello_cyf/<act>')
 def hello_cyf(act):
     return 'Cyf,I %s' % act+'you'
